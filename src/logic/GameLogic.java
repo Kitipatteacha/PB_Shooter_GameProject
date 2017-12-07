@@ -10,6 +10,7 @@ public class GameLogic {
 	private List<Entity> gameObjectContainer;
 	
 	private Player1 player1;
+	private Ground ground;
 	private Player2 player2;
 	private Healthbar healthbar_p2;
 	private Healthbar healthbar_p1;
@@ -21,7 +22,8 @@ public class GameLogic {
 		Field field = new Field();
 		RenderableHolder.getInstance().add(field);
 		player1 = new Player1(180,250);
-		player2 = new Player2(630,320);
+		ground = new Ground(100,100);
+		player2 = new Player2(610,300);
 		healthbar_p1 = new Healthbar(20,20,-100);
 		healthbar_p2 = new Healthbar(480,20,-100);
 		bullet_p1 = new Bullet(player1.get_x_position()+10,player1.get_y_position()+100,KeyCode.SPACE,1);
@@ -29,9 +31,11 @@ public class GameLogic {
 		addNewObject(bullet_p1);
 		addNewObject(bullet_p2);
 		addNewObject(player1);
+		addNewObject(ground);
 		addNewObject(player2);
 		addNewObject(healthbar_p1);
 		addNewObject(healthbar_p2);
+		
 	}
 	
 	protected void addNewObject(Entity entity){
@@ -43,14 +47,16 @@ public class GameLogic {
 		player1.update();
 		player2.update();
 		bullet_p1.update(player1.get_x_position()+10,player1.get_y_position()+100);
-		bullet_p2.update(player2.get_x_position()-30,player2.get_y_position());
+		bullet_p2.update(player2.get_x_position()-40,player2.get_y_position()+20);
 		if(!bullet_p1.isDestroyed() && bullet_p1.collideWith(player2)){
 			healthbar_p2.ishit = true;
-			System.out.println("HIT_P2");
+			bullet_p1.isShoot = false;
+			System.out.println('d');
 		}
 		if(!bullet_p1.isDestroyed() && bullet_p2.collideWith(player1)){
 			healthbar_p1.ishit = true;
-			System.out.println("HIT_P1");
+			bullet_p2.isShoot = false;
+			System.out.println('d');
 		}
 	}
 }

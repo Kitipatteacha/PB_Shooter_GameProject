@@ -20,6 +20,7 @@ public class MainMenu extends VBox {
 			// TODO Auto-generated method stub
 			posX+=1;
 			if(posX>=980)posX=5;
+			System.out.println(posX);
 			WritableImage wim = new WritableImage(im.getPixelReader(),posX,0,800,600);
 			BackgroundImage bg = new BackgroundImage(wim,null,null,null,null);
 			moveBG(bg);
@@ -44,7 +45,7 @@ public class MainMenu extends VBox {
 		this.getChildren().add(buttonBox);
 		buttonBox.setAlignment(Pos.CENTER);
 		
-		movingBG.start();
+		startMovingBG();
 	}
 
 	protected void moveBG(BackgroundImage bg) {
@@ -53,5 +54,9 @@ public class MainMenu extends VBox {
 
 	public void stopMovingBG() {
 		movingBG.stop();
+	}
+	
+	public void startMovingBG() {
+		movingBG.start();
 	}
 }

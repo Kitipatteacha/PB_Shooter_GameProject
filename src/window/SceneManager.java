@@ -15,6 +15,10 @@ public class SceneManager {
 	public static Credit credit = new Credit();
 	public static HowTo howTo = new HowTo();
 	public static Start start = new Start();
+	public static Scene creditScene = new Scene(credit,SCENE_WIDTH,SCENE_HEIGHT);
+	public static Scene mainMenuScene = new Scene(mainMenu,SCENE_WIDTH,SCENE_HEIGHT);
+	public static Scene howToScene = new Scene(howTo,SCENE_WIDTH,SCENE_HEIGHT);
+	public static Scene startScene = new Scene(start,SCENE_WIDTH,SCENE_HEIGHT);
 	
 	public static void initialize(Stage stage) {
 		primaryStage = stage;
@@ -23,26 +27,23 @@ public class SceneManager {
 
 	public static void gotoSceneOf(String goTo) {
 		//TODO Fill Code
+		mainMenu.stopMovingBG();
 		if(goTo.equals("MainMenu")) {
-			Scene next = new Scene(mainMenu,SCENE_WIDTH,SCENE_HEIGHT);
-			primaryStage.setScene(next);
+			mainMenu.startMovingBG();
+			primaryStage.setScene(mainMenuScene);
 			primaryStage.show();
 		}
 		else if(goTo.equals("Credit")){
-			System.out.println("Credit");
-			Scene next = new Scene(credit,SCENE_WIDTH,SCENE_HEIGHT);
-			primaryStage.setScene(next);
+			primaryStage.setScene(creditScene);
 			primaryStage.show();
 		}
 		else if(goTo.equals("HowTo")) {
-			Scene next = new Scene(howTo,SCENE_WIDTH,SCENE_HEIGHT);
-			primaryStage.setScene(next);
+			primaryStage.setScene(howToScene);
 			primaryStage.show();
 		}
 		else if(goTo.equals("Start")) {
-			Scene next = new Scene(start,SCENE_WIDTH,SCENE_HEIGHT);
 			start.focus();
-			primaryStage.setScene(next);
+			primaryStage.setScene(startScene);
 			primaryStage.show();
 		}
 	}

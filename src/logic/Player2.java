@@ -16,7 +16,7 @@ public class Player2 extends CollidableEntity {
 	public Player2(double x, double y) {
 		this.x = x;
 		this.y = y;
-		this.radius = 80;
+		this.radius = 60;
 	}
 
 	private void Up() {
@@ -32,7 +32,7 @@ public class Player2 extends CollidableEntity {
 			this.x += 130;
 	}
 	private void Down() {
-		if(y+90<500)
+		if(y+90<400)
 			this.y += 90;
 	}
 
