@@ -11,6 +11,8 @@ public class Bullet extends CollidableEntity {
 	public boolean isShoot = false;
 	private KeyCode b;
 	private int Bullet_direction ;
+	
+	
 	public Bullet(double x,double y,KeyCode b,int bullet_direction){
 		this.x = x;
 		this.y = y;
@@ -27,7 +29,7 @@ public class Bullet extends CollidableEntity {
 	private void Shoot() {
 			isShoot = true;
 	}
-	public void update(double x,double y) {
+	public void update(double x,double y,int lane) {
 		if (InputUtility.getKeyPressed(b)) {
 			Shoot();
 			InputUtility.remove(b);
@@ -35,6 +37,7 @@ public class Bullet extends CollidableEntity {
 		if(isShoot==false) {
 			this.x = x;
 			this.y = y;
+			this.lane = lane;
 		}
 	}
 
@@ -53,5 +56,7 @@ public class Bullet extends CollidableEntity {
 			isShoot = false;
 		}
 	}
-
+	public int getLane() {
+		return lane;
+	}
 }

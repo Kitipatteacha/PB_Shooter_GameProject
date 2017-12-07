@@ -1,10 +1,7 @@
 package logic;
 
-import input.InputUtility;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
-import sharedObject.RenderableHolder;
 
 public class Healthbar extends CollidableEntity{
 	public boolean ishit = false;

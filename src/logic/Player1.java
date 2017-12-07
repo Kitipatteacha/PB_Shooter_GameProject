@@ -13,15 +13,19 @@ public class Player1 extends CollidableEntity {
 	
     private boolean warp = false;
     private boolean shoot = false;
+    
 	public Player1(double x, double y) {
 		this.x = x;
 		this.y = y;
 		this.radius = 20;
+		this.lane = 2;
 	}
 
-	private void forward() {
-		if(y-90>100)
+	private void up() {
+		if(y-90>100) {
 			this.y -=90;
+			this.lane -=1;
+		}
 	}
 	private void Left() {
 		if(x-130>0)
@@ -32,14 +36,16 @@ public class Player1 extends CollidableEntity {
 			this.x += 130;
 	}
 	private void Down() {
-		if(y+90<400)
+		if(y+90<400) {
 			this.y += 90;
+			this.lane+=1;
+		}
 	}
 
 	public void update() {
 		if (InputUtility.getKeyPressed(KeyCode.W)&&shoot==false) {
 			warp = true;
-			forward();
+			up();
 			InputUtility.remove(KeyCode.W);
 		}
 		if (InputUtility.getKeyPressed(KeyCode.A)&&shoot==false) {
@@ -76,7 +82,12 @@ public class Player1 extends CollidableEntity {
 	public double get_x_position() {
 		return this.x;
 	}
+	
 	public double get_y_position() {
 		return this.y;
+	}
+	
+	public int getLane() {
+		return this.lane;
 	}
 }

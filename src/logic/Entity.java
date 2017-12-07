@@ -6,6 +6,7 @@ public abstract class Entity implements IRenderable{
 
 	protected double x,y;
 	protected int z;
+	protected int lane;
 	protected boolean visible,destroyed;
 	
 	protected Entity(){
@@ -26,5 +27,9 @@ public abstract class Entity implements IRenderable{
 	@Override
 	public int getZ(){
 		return z;
+	}
+	
+	public int getLane() {
+		return lane;
 	}
 }
