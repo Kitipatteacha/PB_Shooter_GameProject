@@ -50,7 +50,7 @@ public class SceneManager {
 			primaryStage.show();
 		}
 		else if(goTo.equals("HowTo2")) {
-			start.focus();
+			start.startGame();
 			primaryStage.setScene(howToScene2);
 			primaryStage.show();
 		}

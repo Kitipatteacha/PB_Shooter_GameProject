@@ -22,15 +22,8 @@ public class MainMenu extends VBox {
 		public void handle(long now) {
 			// TODO Auto-generated method stub
 			posX+=1;
-<<<<<<< HEAD
-			if(posX>=980)posX=5;//if(repeatPixel)startLoopPixel
-||||||| merged common ancestors
-			if(posX>=980)posX=5;
-			System.out.println(posX);
-=======
 			if(posX>=1520)posX=0;
 			System.out.println(posX);
->>>>>>> a6f1fdb86aef8f760a776cc05071d2f5252f53e2
 			WritableImage wim = new WritableImage(im.getPixelReader(),posX,0,800,600);
 			BackgroundImage bg = new BackgroundImage(wim,null,null,null,null);
 			moveBG(bg);
