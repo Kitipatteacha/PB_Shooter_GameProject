@@ -19,7 +19,7 @@ public class Player1 extends CollidableEntity {
 	}
 
 	private void up() {
-		if(y-90>100) {
+		if(y-180>100) {
 			this.y -=90;
 			this.lane -=1;
 		}

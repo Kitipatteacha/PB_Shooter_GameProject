@@ -46,6 +46,7 @@ public class BaseButton extends Canvas {
 	
 	private void addEventHandler() {
 		this.setOnMouseClicked((MouseEvent event) -> {
+			System.out.println(goToScene);
 			SceneManager.gotoSceneOf(goToScene);
 		});
 		this.setOnMouseEntered((MouseEvent event) -> {

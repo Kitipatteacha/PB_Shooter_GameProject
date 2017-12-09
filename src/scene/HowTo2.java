@@ -8,10 +8,10 @@ import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 
-public class HowTo extends AnchorPane{
+public class HowTo2 extends AnchorPane{
 	
-	public HowTo() {
-		Image in = new Image(ClassLoader.getSystemResource("player1_tutorial.png").toString(),800,600,false,false);
+	public HowTo2() {
+		Image in = new Image(ClassLoader.getSystemResource("player2_tutorial.png").toString(),800,600,false,false);
 		ImageView pic = new ImageView(in);
 		this.getChildren().add(pic);
 		
@@ -24,7 +24,7 @@ public class HowTo extends AnchorPane{
 		
 		HBox control = new HBox();
 		BaseButton prev = new BaseButton("prev");
-		prev.setGoToScene("MainMenu");
+		prev.setGoToScene("HowTo");
 		BaseButton next = new BaseButton("next");
 		next.setGoToScene("HowTo2");
 		Text indi = new Text("--/1");
