@@ -1,7 +1,6 @@
 package logic;
 
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.WritableImage;
 import sharedObject.IRenderable;
 import sharedObject.RenderableHolder;
 

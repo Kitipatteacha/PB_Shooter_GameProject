@@ -8,6 +8,7 @@ public class AnimatedImage
     public Image[] frames;
     public double duration;
     public int index;
+    
     public Image getFrame(double time)
     {
         index = (int)((time % (frames.length * duration)) / duration);
@@ -15,6 +16,10 @@ public class AnimatedImage
     }
     
     public int getIndex() {
-    	return index;
+    		return index;
+    }
+    
+    public void setDuration(double duration) {
+    		this.duration = duration;
     }
 }

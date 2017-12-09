@@ -7,6 +7,7 @@ public abstract class Entity implements IRenderable{
 	protected double x,y;
 	protected int z;
 	protected int lane;
+	protected int col;
 	protected boolean visible,destroyed;
 	
 	protected Entity(){
@@ -31,5 +32,9 @@ public abstract class Entity implements IRenderable{
 	
 	public int getLane() {
 		return lane;
+	}
+	
+	public int getCol() {
+		return col;
 	}
 }

@@ -1,12 +1,8 @@
 package logic;
 
 import input.InputUtility;
-import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.WritableImage;
 import javafx.scene.input.KeyCode;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.ArcType;
 import sharedObject.RenderableHolder;
 
 public class Player2 extends CollidableEntity {
@@ -48,17 +44,17 @@ public class Player2 extends CollidableEntity {
 			Up();
 			InputUtility.remove(KeyCode.UP);
 		}
-		if (InputUtility.getKeyPressed(KeyCode.LEFT)&&shoot==false) {
+		else if (InputUtility.getKeyPressed(KeyCode.LEFT)&&shoot==false) {
 			warp = true;
 			Left();
 			InputUtility.remove(KeyCode.LEFT);
 		} 
-		if (InputUtility.getKeyPressed(KeyCode.RIGHT)&&shoot==false) {
+		else if (InputUtility.getKeyPressed(KeyCode.RIGHT)&&shoot==false) {
 			warp = true;
 			Right();
 			InputUtility.remove(KeyCode.RIGHT);
 		} 
-		if (InputUtility.getKeyPressed(KeyCode.DOWN)&&shoot==false) {
+		else if (InputUtility.getKeyPressed(KeyCode.DOWN)&&shoot==false) {
 			warp = true;
 			Down();
 			InputUtility.remove(KeyCode.DOWN);
@@ -71,9 +67,9 @@ public class Player2 extends CollidableEntity {
 		if(warp == false) 
 			gc.drawImage(RenderableHolder.player2_animated.getFrame(t), x-radius,  y-radius );
 	    if(warp == true) {
-	    	gc.drawImage(RenderableHolder.warp_p2_animated.getFrame(t), x-radius,  y-radius );
-	    	if(RenderableHolder.warp_p2_animated.getIndex()==4)
-	    		warp = false;
+	    		gc.drawImage(RenderableHolder.warp_p2_animated.getFrame(t), x-radius,  y-radius );
+	    		if(RenderableHolder.warp_p2_animated.getIndex()==4)
+	    			warp = false;
 	    }
 	}
 	

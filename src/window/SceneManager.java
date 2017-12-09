@@ -42,7 +42,7 @@ public class SceneManager {
 			primaryStage.show();
 		}
 		else if(goTo.equals("Start")) {
-			start.focus();
+			start.startGame();
 			primaryStage.setScene(startScene);
 			primaryStage.show();
 		}
