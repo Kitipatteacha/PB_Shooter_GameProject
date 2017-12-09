@@ -21,7 +21,7 @@ public class GameLogic {
 	
 		Field field = new Field();
 		RenderableHolder.getInstance().add(field);
-		player1 = new Player1(180,250);
+		player1 = new Player1(220,300);
 		ground = new Ground(100,100);
 		player2 = new Player2(610,300);
 		healthbar_p1 = new Healthbar(20,20,-100);
@@ -46,8 +46,8 @@ public class GameLogic {
 	public void logicUpdate(){
 		player1.update();
 		player2.update();
-		bullet_p1.update(player1.get_x_position()+10,player1.get_y_position()+100,player1.getLane());
-		bullet_p2.update(player2.get_x_position()-40,player2.get_y_position()+20,player2.getLane());
+		bullet_p1.update(player1.get_x_position()-30,player1.get_y_position()+50,player1.getLane());
+		bullet_p2.update(player2.get_x_position()-30,player2.get_y_position()+50,player2.getLane());
 		if(!bullet_p1.isDestroyed() && bullet_p1.collideWith(player2)){
 			healthbar_p2.ishit = true;
 			bullet_p1.isShoot = false;

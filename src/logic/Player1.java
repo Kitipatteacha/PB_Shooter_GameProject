@@ -17,12 +17,12 @@ public class Player1 extends CollidableEntity {
 	public Player1(double x, double y) {
 		this.x = x;
 		this.y = y;
-		this.radius = 20;
+		this.radius = 60;
 		this.lane = 2;
 	}
 
 	private void up() {
-		if(y-90>100) {
+		if(y-180>100) {
 			this.y -=90;
 			this.lane -=1;
 		}
