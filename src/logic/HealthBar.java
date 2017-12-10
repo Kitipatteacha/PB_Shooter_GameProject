@@ -5,7 +5,6 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
 public class HealthBar extends Entity{
-	public boolean ishit = false;
 	public double hpRatio;
 	public int side;
 	private BaseShooter shooter;

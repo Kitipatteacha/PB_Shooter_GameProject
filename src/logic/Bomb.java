@@ -18,15 +18,15 @@ public class Bomb extends CollidableEntity{
 	
 	public Bomb(int side,int lane, int col,BaseShooter owner){
 		this.z = -15;
-		this.radius = 20;
 		this.speed = 10;
 		this.speedX = Math.cos(Math.PI/3)*speed;
 		this.speedY = Math.sin(Math.PI/3)*speed;
 		this.side = side;
 		this.lane = lane;
 		this.col = col;
+		
 		this.owner = owner;
-		this.target = GameLogic.getOpposite(owner);
+		this.target = GameLogic.getOpponentOf(owner);
 		this.posYTimer = System.nanoTime();
 		if(side == 0) {
 			this.Bomb_direction = 1;
@@ -46,12 +46,13 @@ public class Bomb extends CollidableEntity{
 	public void update() {
 		if(this.y > Ground.getPosY(lane)) {
 			
-			if(target.getCol()==this.col) {
+			if(target.getCol()==this.col && target.getLane() == this.lane) {
 				owner.attack(target,this);
 			}
 			isThrow = false;
 			destroyed = true;
 		}
+		if(speedY<0)this.z=90;
 	}
 	
 	@Override
@@ -64,7 +65,7 @@ public class Bomb extends CollidableEntity{
 			x+=speedX*Bomb_direction;
 			speedY -= (0.5)*t;
 			if(y-speedY > Ground.getPosY(lane)) {
-				
+				gc.fillRect(Ground.getPosX(col, target.getSide())-50,Ground.getPosY(lane)-70, 100, 100);
 			}
 		}
 	}

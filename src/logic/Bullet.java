@@ -20,7 +20,7 @@ public class Bullet extends CollidableEntity {
 		this.lane = lane;
 		this.col = col;
 		this.owner = owner;
-		this.target = GameLogic.getOpposite(owner);
+		this.target = GameLogic.getOpponentOf(owner);
 		if(side == 0) {
 			this.Bullet_direction = 1;
 		}

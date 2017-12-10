@@ -43,8 +43,7 @@ public class SceneManager {
 			primaryStage.setScene(startScene);
 			primaryStage.show();
 		}
-		else if(goTo.equals("HowTo2")) {
-			start.startGame();
+		else if(goTo.equals("HowTo")) {
 			primaryStage.setScene(howToScene2);
 			primaryStage.show();
 		}

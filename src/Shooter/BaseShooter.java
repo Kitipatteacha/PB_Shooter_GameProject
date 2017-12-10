@@ -56,8 +56,8 @@ public class BaseShooter extends CollidableEntity{
 		this.maxHp = 300;
 		this.hp = this.maxHp;
 		this.atk = 20;
-		this.atkCD = 0.500;//Attack cool down (second)
-		this.bombCD = 1.00;
+		this.atkCD = 0.300;//Attack cool down (second)
+		this.bombCD = 3.00;
 		this.atkTimer = System.nanoTime();
 		this.bombTimer = System.nanoTime();
 		
@@ -213,6 +213,10 @@ public class BaseShooter extends CollidableEntity{
 
 	public double getHp() {
 		return hp;
+	}
+
+	public int getSide() {
+		return side;
 	}
 
 	

@@ -9,6 +9,7 @@ import sharedObject.RenderableHolder;
 public class GameLogic {
 	private static List<Entity> gameObjectContainer;
 	
+	public static Timer timer;
 	private Ground ground;
 	private static BaseShooter p1;
 	private static BaseShooter p2;
@@ -18,12 +19,15 @@ public class GameLogic {
 	
 		Field field = new Field();
 		RenderableHolder.getInstance().add(field);
+		
+		timer = new Timer(60);
 		p1 = new BaseShooter(0);
 		ground = new Ground(100,100);
 		p2 = new BaseShooter(1);
 		addNewObject(ground);
 		addNewObject(p1);
 		addNewObject(p2);
+		addNewObject(timer);
 	}
 	
 	public static void addNewObject(Entity entity){
@@ -40,7 +44,7 @@ public class GameLogic {
 		}
 	}
 	
-	public static BaseShooter getOpposite(BaseShooter shooter) {
+	public static BaseShooter getOpponentOf(BaseShooter shooter) {
 		if(shooter.equals(p1)) {
 			return p2;
 		}

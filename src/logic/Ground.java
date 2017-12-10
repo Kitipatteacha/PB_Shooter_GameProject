@@ -31,7 +31,7 @@ public class Ground extends CollidableEntity{
 
 	public static double getPosX(int col,int side) {
 		if(side == 0) {
-			return 80+(col-1)*132;
+			return 75+(col-1)*132;
 		}
 		else {
 			return 465+(col-1)*132;
