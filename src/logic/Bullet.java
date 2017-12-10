@@ -39,7 +39,7 @@ public class Bullet extends CollidableEntity {
 	@Override
 	public void draw(GraphicsContext gc) {
 		gc.setFill(Color.LAWNGREEN);
-		gc.fillOval(x, y, 25, 25);
+		gc.fillOval(x, y, 25, 20);
 		if(isShoot) {
 			x+=speed*Bullet_direction;
 		}
