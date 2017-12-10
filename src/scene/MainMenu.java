@@ -23,7 +23,6 @@ public class MainMenu extends VBox {
 			// TODO Auto-generated method stub
 			posX+=1;
 			if(posX>=1520)posX=0;
-			System.out.println(posX);
 			WritableImage wim = new WritableImage(im.getPixelReader(),posX,0,800,600);
 			BackgroundImage bg = new BackgroundImage(wim,null,null,null,null);
 			moveBG(bg);

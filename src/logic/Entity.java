@@ -37,4 +37,6 @@ public abstract class Entity implements IRenderable{
 	public int getCol() {
 		return col;
 	}
+	
+	public void update() {};
 }

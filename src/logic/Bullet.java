@@ -1,54 +1,67 @@
 package logic;
 
-import input.InputUtility;
+import Shooter.BaseShooter;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
-import sharedObject.RenderableHolder;
-import logic.Player1;
 
 public class Bullet extends CollidableEntity {
 	public boolean isShoot = false;
-	private KeyCode b;
 	private int Bullet_direction ;
 	private int side;
+	private BaseShooter owner;
+	private BaseShooter target;
+	private double speed;
 	
-	public Bullet(int side){
+	public Bullet(int side,int lane, int col,BaseShooter owner){
 		this.z = -10;
 		this.radius = 20;
-		this.Bullet_direction = side;
+		this.speed = 20;
+		this.side = side;
+		this.lane = lane;
+		this.col = col;
+		this.owner = owner;
+		this.target = GameLogic.getOpposite(owner);
 		if(side == 0) {
 			this.Bullet_direction = 1;
 		}
 		else {
 			this.Bullet_direction = -1;
 		}
-		this.side = side;
+		shoot();
 	}
 	
-	public void onCollision(Player1 tank){
-		RenderableHolder.explosionSound.play();
-	}
-	
-	public void Shoot(int lane, int col) {
-		this.x = Ground.getPosX(col,side);
-		this.y = Ground.getPosY(lane);
+	public void shoot() {
+		this.x = Ground.getPosX(col,side)-50;
+		this.y = Ground.getPosY(lane)-70;
 		isShoot = true;
 	}
 
 	@Override
 	public void draw(GraphicsContext gc) {
 		gc.setFill(Color.LAWNGREEN);
-		gc.fillOval(x-50, y-70, 25, 25);
+		gc.fillOval(x, y, 25, 25);
 		if(isShoot) {
-			x+=30*Bullet_direction;
+			x+=speed*Bullet_direction;
 		}
 		if(x>800 || x<0) {
 			isShoot = false;
+			destroyed = true;
 		}
 	}
 	
-	public boolean getIsShoot() {
-		return isShoot;
+	public void update() {
+		if(this.collideWith(target)) {
+			owner.attack(target,this);
+			isShoot = false;
+			destroyed = true;
+		}
 	}
+	
+	public void calculateHitbox() {
+		this.hitboxX = this.x;
+		this.hitboxY = this.y;
+		this.hitboxW = 25;
+		this.hitboxH = 25;
+	};
+	
 }
