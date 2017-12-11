@@ -3,7 +3,7 @@ package window;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import scene.Credit;
-import scene.HowTo2;
+import scene.HowTo;
 import scene.MainMenu;
 import scene.Start;
 
@@ -13,13 +13,13 @@ public class SceneManager {
 	public static final int SCENE_HEIGHT = 600;
 	public static MainMenu mainMenu = new MainMenu();
 	public static Credit credit = new Credit();
-	public static HowTo2 howTo2 = new HowTo2();
-	public static Start start = new Start();
+	public static HowTo howTo = new HowTo();
+	public static Start start;
 	
 	public static Scene creditScene = new Scene(credit,SCENE_WIDTH,SCENE_HEIGHT);
 	public static Scene mainMenuScene = new Scene(mainMenu,SCENE_WIDTH,SCENE_HEIGHT);
-	public static Scene startScene = new Scene(start,SCENE_WIDTH,SCENE_HEIGHT);
-	public static Scene howToScene2 = new Scene(howTo2,SCENE_WIDTH,SCENE_HEIGHT);
+	public static Scene startScene;
+	public static Scene howToScene = new Scene(howTo,SCENE_WIDTH,SCENE_HEIGHT);
 	
 	public static void initialize(Stage stage) {
 		primaryStage = stage;
@@ -39,12 +39,14 @@ public class SceneManager {
 			primaryStage.show();
 		}
 		else if(goTo.equals("Start")) {
+			start = new Start();
+			startScene = new Scene(start,SCENE_WIDTH,SCENE_HEIGHT);
 			start.startGame();
 			primaryStage.setScene(startScene);
 			primaryStage.show();
 		}
 		else if(goTo.equals("HowTo")) {
-			primaryStage.setScene(howToScene2);
+			primaryStage.setScene(howToScene);
 			primaryStage.show();
 		}
 	}

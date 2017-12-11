@@ -7,7 +7,6 @@ import java.util.List;
 
 import javafx.scene.image.Image;
 import javafx.scene.media.AudioClip;
-import sharedObject.AnimatedImage;
 
 public class RenderableHolder {
 	private static final RenderableHolder instance = new RenderableHolder();
@@ -17,16 +16,6 @@ public class RenderableHolder {
 	public static Image Background;
 	public static Image Ground;
 	public static AudioClip  explosionSound;
-	
-	public static AnimatedImage player1_animated = new AnimatedImage();
-	public static Image[] imageArray1 = new Image[9];
-	public static Image player2;
-	public static Image[] imageArray2 = new Image[5];
-	public static AnimatedImage warp_animated = new AnimatedImage();
-	public static Image[] imageArray3 = new Image[9];
-	public static AnimatedImage player2_animated = new AnimatedImage();
-	public static Image[] imageArray4 = new Image[5];
-	public static AnimatedImage warp_p2_animated = new AnimatedImage();
 	
 	static {
 		loadResource();
@@ -53,7 +42,6 @@ public class RenderableHolder {
 	}
 
 	public void add(IRenderable entity) {
-		System.out.println("add");
 		entities.add(entity);
 		Collections.sort(entities, comparator);
 	}
@@ -68,5 +56,9 @@ public class RenderableHolder {
 
 	public List<IRenderable> getEntities() {
 		return entities;
+	}
+	
+	public void newGame() {
+		entities.clear();
 	}
 }

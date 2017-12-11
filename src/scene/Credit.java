@@ -9,7 +9,7 @@ import javafx.scene.layout.BorderPane;
 
 public class Credit extends BorderPane {
 
-	private Image im = new Image(ClassLoader.getSystemResource("pexels-photo-370799.jpg").toString(),800,600,false,false);
+	private Image im = new Image(ClassLoader.getSystemResource("BG.jpg").toString(),800,600,false,false);
 	private BackgroundImage bg = new BackgroundImage(im, null, null, null, null);
 	
 	public Credit() {

@@ -52,7 +52,7 @@ public class Bomb extends CollidableEntity{
 			isThrow = false;
 			destroyed = true;
 		}
-		if(speedY<0)this.z=90;
+		if(speedY<0)this.z=20;
 	}
 	
 	@Override

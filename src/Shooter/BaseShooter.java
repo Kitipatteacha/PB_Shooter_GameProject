@@ -12,7 +12,7 @@ import logic.Ground;
 import logic.HealthBar;
 import sharedObject.AnimatedImage;
 
-public class BaseShooter extends CollidableEntity{
+public abstract class BaseShooter extends CollidableEntity{
 	protected AnimatedImage normal_Animation = new AnimatedImage();
 	protected AnimatedImage warp_Animation = new AnimatedImage();
 	private boolean warp = false;
@@ -27,9 +27,10 @@ public class BaseShooter extends CollidableEntity{
     public double hp;
     public double atk;
     public double atkCD;
+    public double bombDmg;
     public double bombCD;
     
-	public BaseShooter(int side) {
+	public BaseShooter(int side,String pic) {
 		this.radius = 60;
 		this.side = side;
 		this.lane = 2;
@@ -53,17 +54,20 @@ public class BaseShooter extends CollidableEntity{
 			bomb = KeyCode.P;
 		}
 		
+		//Character Status Area
 		this.maxHp = 300;
 		this.hp = this.maxHp;
 		this.atk = 20;
 		this.atkCD = 0.300;//Attack cool down (second)
+		this.bombDmg = 50;
 		this.bombCD = 3.00;
-		this.atkTimer = System.nanoTime();
-		this.bombTimer = System.nanoTime();
+		//End
 		
+		this.atkTimer = -1;
+		this.bombTimer = -1;
 		this.hpBar = new HealthBar(side,this);
 		
-		loadAnimate();
+		loadAnimate(pic);
 	}
 	
 	public void calculateHitbox() {
@@ -99,32 +103,20 @@ public class BaseShooter extends CollidableEntity{
 		}
 	}
 	
-	private void loadAnimate() {
-		Image[] normalArray = new Image[9];
-		Image[] warpArray = new Image[5];
-		
-		if(side == 0) {
-			for (int i = 0; i < 9; i++) {
-				normalArray[i] = new Image(ClassLoader.getSystemResource(i + ".png").toString() );
-			}
-			for (int i = 0; i < 5; i++) {
-				warpArray[i] = new Image(ClassLoader.getSystemResource("Warp_" + i + ".png").toString() );
-	        }
+	private void throwBomb() {
+		if((System.nanoTime()-this.bombTimer)/1000000000 >= this.bombCD) {
+			this.bombTimer = System.nanoTime();
+			GameLogic.addNewObject(new Bomb(side,lane,col,this));
 		}
-		else {
-			for (int i = 0; i < 9; i++) {
-				normalArray[i] = new Image(ClassLoader.getSystemResource("player2_" + i + ".png").toString() );
-			}
-			for (int i = 0; i < 5; i++) {
-				warpArray[i] = new Image(ClassLoader.getSystemResource("warp_p2_" + i + ".png").toString() );
-	        }
-		}
-		normal_Animation.frames = normalArray;
-		warp_Animation.frames = warpArray;
-		this.normal_Animation.setDuration(0.100);
-		this.warp_Animation.setDuration(0.100);
 	}
-	
+
+	private void shoot() {
+		if((System.nanoTime()-this.atkTimer)/1000000000 >= this.atkCD) {
+			this.atkTimer = System.nanoTime();
+			GameLogic.addNewObject(new Bullet(side,lane,col,this));
+		}
+	}
+
 	public void attack(BaseShooter other,CollidableEntity way) {
 		double totalAtk;
 		totalAtk = atk;//Attack Calculation
@@ -152,6 +144,32 @@ public class BaseShooter extends CollidableEntity{
 		else this.hp +=amount;
 	}
 	
+	private void loadAnimate(String charName) {
+		Image[] normalArray = new Image[9];
+		Image[] warpArray = new Image[5];
+		
+		if(side == 0) {
+			for (int i = 0; i < 9; i++) {
+				normalArray[i] = new Image(ClassLoader.getSystemResource(charName + "_L_" + i + ".png").toString() );
+			}
+			for (int i = 0; i < 5; i++) {
+				warpArray[i] = new Image(ClassLoader.getSystemResource(charName + "_L_" + "Warp_" + i + ".png").toString() );
+	        }
+		}
+		else {
+			for (int i = 0; i < 9; i++) {
+				normalArray[i] = new Image(ClassLoader.getSystemResource(charName + "_R_" + i + ".png").toString() );
+			}
+			for (int i = 0; i < 5; i++) {
+				warpArray[i] = new Image(ClassLoader.getSystemResource(charName + "_R_" + i + ".png").toString() );
+	        }
+		}
+		normal_Animation.frames = normalArray;
+		warp_Animation.frames = warpArray;
+		this.normal_Animation.setDuration(0.100);
+		this.warp_Animation.setDuration(0.100);
+	}
+
 	public void update() {
 		if (InputUtility.getKeyPressed(up)) {
 			warp = true;
@@ -174,24 +192,15 @@ public class BaseShooter extends CollidableEntity{
 			InputUtility.remove(down);
 		} 
 		else if (InputUtility.getKeyPressed(fire)) {
-			if((System.nanoTime()-this.atkTimer)/1000000000 >= this.atkCD) {
-				System.out.println("shoot");
-				this.atkTimer = System.nanoTime();
-				GameLogic.addNewObject(new Bullet(side,lane,col,this));
-			}
-			
+			shoot();
 			InputUtility.remove(fire);
 		}
 		else if (InputUtility.getKeyPressed(bomb)) {
-			if((System.nanoTime()-this.bombTimer)/1000000000 >= this.bombCD) {
-				System.out.println("bomb");
-				this.bombTimer = System.nanoTime();
-				GameLogic.addNewObject(new Bomb(side,lane,col,this));
-			}
+			throwBomb();
 			InputUtility.remove(bomb);
 		} 
 	}
-	
+
 	@Override
 	public void draw(GraphicsContext gc) {
 		// TODO Auto-generated method stub
@@ -203,7 +212,6 @@ public class BaseShooter extends CollidableEntity{
 	    		if(warp_Animation.getIndex()==4)
 	    			warp = false;
 	    }
-		
 		hpBar.draw(gc);
 	}
 

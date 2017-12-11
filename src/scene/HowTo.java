@@ -8,10 +8,10 @@ import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 
-public class HowTo2 extends AnchorPane{
+public class HowTo extends AnchorPane{
 	
-	public HowTo2() {
-		Image in = new Image(ClassLoader.getSystemResource("player2_tutorial.png").toString(),800,600,false,false);
+	public HowTo() {
+		Image in = new Image(ClassLoader.getSystemResource("tutorial_0.png").toString(),800,600,false,false);
 		ImageView pic = new ImageView(in);
 		this.getChildren().add(pic);
 		

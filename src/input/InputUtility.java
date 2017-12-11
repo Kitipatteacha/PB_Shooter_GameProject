@@ -23,7 +23,6 @@ public class InputUtility {
 		}else{
 			keyPressed.remove(keycode);
 		}
-		System.out.println(keyPressed);
 	}
 	
 	public static void remove(KeyCode keycode){
