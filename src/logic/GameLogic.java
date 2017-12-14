@@ -7,6 +7,7 @@ import Shooter.Balloon;
 import Shooter.BaseShooter;
 import Shooter.Egg;
 import Shooter.Ninja;
+import Shooter.Robot;
 import input.InputUtility;
 import javafx.scene.input.KeyCode;
 import sharedObject.RenderableHolder;
@@ -34,8 +35,8 @@ public class GameLogic {
 		
 		
 		
-		p1 = new Ninja(0);
-		p2 = new Ninja(1);
+		p1 = new Robot(0);
+		p2 = new Robot(1);
 		
 		
 		
