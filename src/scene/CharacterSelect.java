@@ -91,24 +91,24 @@ public class CharacterSelect extends AnchorPane{
 			@Override
 			public void handle(KeyEvent event) {
 				if(event.getCode() == KeyCode.A && !p1Lock) {
-					
 					if(p1Choice>0)p1Choice--;
 					picP1.setImage(p1Array[p1Choice]);
+					p1Status.setText(name.get(p1Choice));
 				}
 				else if(event.getCode() == KeyCode.D && !p1Lock) {
-					
 					if(p1Choice<3)p1Choice++;
 					picP1.setImage(p1Array[p1Choice]);
+					p1Status.setText(name.get(p1Choice));
 				}
 				else if(event.getCode() == KeyCode.LEFT && !p2Lock) {
-					
 					if(p2Choice>0)p2Choice--;
 					picP2.setImage(p2Array[p2Choice]);
+					p2Status.setText(name.get(p2Choice));
 				}
 				else if(event.getCode() == KeyCode.RIGHT && !p2Lock) {
-					
 					if(p2Choice<3)p2Choice++;
 					picP2.setImage(p2Array[p2Choice]);
+					p2Status.setText(name.get(p2Choice));
 				}
 				else if(event.getCode() == KeyCode.B) {
 					p1Lock = true;

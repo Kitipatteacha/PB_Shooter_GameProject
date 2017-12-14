@@ -16,20 +16,23 @@ public class Egg extends BaseShooter{
 		this.bombCD = 5.0;
 		this.atk = 30;
 		this.atkCD = 2.0;
-		this.x = Ground.getPosX(col, side)-120;
+		if(side==0)this.x = Ground.getPosX(col, side)-120;
+		else this.x = Ground.getPosX(col, side)-50;
 		loadAnimate("Egg");
 	}
 
 	protected void left() {
 		if(col-1>0&&movable) {
 			this.col-=1;
-			this.x = Ground.getPosX(col, side)-120;
+			if(side==0)this.x = Ground.getPosX(col, side)-120;
+			else this.x = Ground.getPosX(col, side)-50;
 		}
 	}
 	protected void right() {
 		if(col+1<=3&&movable) {
 			this.col+=1;
-			this.x = Ground.getPosX(col, side)-120;
+			if(side==0)this.x = Ground.getPosX(col, side)-120;
+			else this.x = Ground.getPosX(col, side)-50;
 		}
 	}
 	
