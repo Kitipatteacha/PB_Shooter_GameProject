@@ -32,7 +32,6 @@ public class SceneManager {
 	}
 
 	public static void gotoSceneOf(String goTo) {
-		//TODO Fill Code
 		mainMenu.stopMovingBG();
 		if(goTo.equals("MainMenu")) {
 			mainMenu.startMovingBG();

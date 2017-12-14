@@ -55,7 +55,7 @@ public class MainMenu extends VBox {
 		this.setBackground(new Background(bg));
 	}
     protected void soundTheme() {
-    	Theme.play();
+    		Theme.play();
     }
 	public void stopMovingBG() {
 		movingBG.stop();

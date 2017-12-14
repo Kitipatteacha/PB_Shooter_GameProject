@@ -160,5 +160,6 @@ public class CharacterSelect extends AnchorPane{
 		p2Lock = false;
 		picP1.setImage(p1Array[p1Choice]);
 		picP2.setImage(p2Array[p2Choice]);
+		
 	}
 }
