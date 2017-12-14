@@ -29,7 +29,7 @@ public class HealthBar extends Entity{
 	@Override
 	public void draw(GraphicsContext gc) {
 		hpRatio = owner.getHp()/owner.getMaxHp();
-		text_width = fl.computeStringWidth(""+owner.getHp(), TEXT_FONT);
+		text_width = fl.computeStringWidth(""+(int)owner.getHp(), TEXT_FONT);
 		if(side == 0) {
 			
 			gc.setFill(Color.CORNFLOWERBLUE);
@@ -67,7 +67,7 @@ public class HealthBar extends Entity{
 			
 			gc.setFont(TEXT_FONT);
 			gc.setFill(Color.GREY);
-			gc.fillText(""+(int)owner.getHp(), 800-text_width, 42);
+			gc.fillText(""+(int)owner.getHp(), 775-text_width, 42);
 		}
 		
 	}

@@ -22,7 +22,7 @@ public class Bomb extends CollidableEntity{
 	private double speedY;
 	
 	public Bomb(int side,int lane, int col,BaseShooter owner){
-		this.z = 20;
+		this.z = -15;
 		this.speed = 10;
 		this.speedX = Math.cos(Math.PI/3)*speed;
 		this.speedY = Math.sin(Math.PI/3)*speed;
@@ -68,6 +68,17 @@ public class Bomb extends CollidableEntity{
 			}
 			isThrow = false;
 		}
+		if(this.speedY<0) {
+			if(this.lane == 1) {
+				this.z = 5;
+			}
+			else if(this.lane == 2) {
+				this.z = 15;
+			}
+			else if(this.lane == 3) {
+				this.z = 25;
+			}
+		}
 	}
 	
 	@Override
@@ -81,7 +92,7 @@ public class Bomb extends CollidableEntity{
 			x+=speedX*Bomb_direction;
 			speedY -= (0.5)*t;
 		}
-		if(y-speedY > Ground.getPosY(lane)) {
+		else {
 			gc.drawImage(bomb_Animation.getFrame(t2), Ground.getPosX(col, target.getSide())-30,  Ground.getPosY(lane)-175 );
 			if(bomb_Animation.getIndex()>=24) {
 				destroyed = true;

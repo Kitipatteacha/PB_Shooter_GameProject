@@ -17,7 +17,6 @@ public class Bullet extends CollidableEntity {
 	
 	public Bullet(int side,int lane, int col,BaseShooter owner){
 		this.z = -10;
-		this.radius = 20;
 		this.speed = 20;
 		this.side = side;
 		this.lane = lane;

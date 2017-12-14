@@ -49,7 +49,6 @@ public class RenderableHolder {
 
 	public void add(IRenderable entity) {
 		entities.add(entity);
-		Collections.sort(entities, comparator);
 	}
 
 	public void update() {
@@ -58,6 +57,7 @@ public class RenderableHolder {
 				entities.remove(i);
 			}
 		}
+		Collections.sort(entities, comparator);
 	}
 
 	public List<IRenderable> getEntities() {

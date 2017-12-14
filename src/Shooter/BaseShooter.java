@@ -88,12 +88,14 @@ public abstract class BaseShooter extends CollidableEntity{
 
 	protected void up() {
 		if(lane-1>0&&movable) {
+			this.z-=10;
 			this.lane -=1;
 			this.y = Ground.getPosY(lane)-imageH;
 		}
 	}
 	protected void down() {
 		if(lane+1<=3&&movable) {
+			this.z+=10;
 			this.lane +=1;
 			this.y = Ground.getPosY(lane)-imageH;
 		}
@@ -245,7 +247,7 @@ public abstract class BaseShooter extends CollidableEntity{
 		    			warp = false;
 		    }
 		}
-		else {
+		else if(movable==false && shootable==false){
 			gc.drawImage(normal_Animation.getFrame(1100000000), x,  y );
 			gc.setFill(Color.WHITE);
 			gc.setFont(new Font("Monospace", 30));
@@ -254,6 +256,26 @@ public abstract class BaseShooter extends CollidableEntity{
 			gc.setStroke(Color.BLACK);
 			gc.setLineWidth(0.5);
 			gc.strokeText("Stun", x+20, y+60);
+		}
+		else if(movable==false){
+			gc.drawImage(normal_Animation.getFrame(1100000000), x,  y );
+			gc.setFill(Color.MEDIUMPURPLE);
+			gc.setFont(new Font("Monospace", 30));
+			gc.fillText("Snare", x+20, y+60);
+			
+			gc.setStroke(Color.BLACK);
+			gc.setLineWidth(0.5);
+			gc.strokeText("Snare", x+20, y+60);
+		}
+		else if(shootable==false){
+			gc.drawImage(normal_Animation.getFrame(1100000000), x,  y );
+			gc.setFill(Color.WHITE);
+			gc.setFont(new Font("Monospace", 30));
+			gc.fillText("Disarm", x+20, y+60);
+			
+			gc.setStroke(Color.BLACK);
+			gc.setLineWidth(0.5);
+			gc.strokeText("Disarm", x+20, y+60);
 		}
 		hpBar.draw(gc);
 		cdBar.draw(gc);
