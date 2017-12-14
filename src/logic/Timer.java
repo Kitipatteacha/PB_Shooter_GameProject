@@ -6,6 +6,7 @@ import com.sun.javafx.tk.Toolkit;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import sharedObject.RenderableHolder;
 
 @SuppressWarnings("restriction")
 public class Timer extends Entity{
@@ -19,6 +20,8 @@ public class Timer extends Entity{
 		z = 50;
 		start = System.nanoTime();
 		this.time = countDown;
+		RenderableHolder.fightTheme.setVolume(0.1);
+		RenderableHolder.fightTheme.play();
 		
 	}
 	

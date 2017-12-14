@@ -9,6 +9,8 @@ import javafx.scene.image.WritableImage;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.AudioClip;
+import sharedObject.RenderableHolder;
 
 public class MainMenu extends VBox {
 	
@@ -16,6 +18,7 @@ public class MainMenu extends VBox {
 	private Image Logo = new Image(ClassLoader.getSystemResource("Logo.png").toString());
 	private WritableImage wim = new WritableImage(im.getPixelReader(),0,0,800,600);
 	private BackgroundImage bg = new BackgroundImage(wim, null, null, null, null);
+	private AudioClip theme = new AudioClip(ClassLoader.getSystemResource("theme.mp3").toString());
 	private AnimationTimer movingBG = new AnimationTimer() {
 		int posX=0;
 		@Override
@@ -26,12 +29,12 @@ public class MainMenu extends VBox {
 			WritableImage wim = new WritableImage(im.getPixelReader(),posX,0,800,600);
 			BackgroundImage bg = new BackgroundImage(wim,null,null,null,null);
 			moveBG(bg);
+			
 		}
 		
 	};
 	
 	public MainMenu() {
-		
 
 		this.setAlignment(Pos.CENTER);
 		this.setBackground(new Background(bg));
@@ -55,9 +58,12 @@ public class MainMenu extends VBox {
 
 	public void stopMovingBG() {
 		movingBG.stop();
+		theme.stop();
 	}
 	
 	public void startMovingBG() {
 		movingBG.start();
+		theme.setVolume(0.1);
+		theme.play();
 	}
 }

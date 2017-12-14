@@ -3,6 +3,7 @@ package logic;
 import Shooter.BaseShooter;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import sharedObject.RenderableHolder;
 
 public class CoolDownDisplay extends Entity{
 
@@ -10,11 +11,11 @@ public class CoolDownDisplay extends Entity{
 	private double bombRatio;
 	public int side;
 	private BaseShooter owner;
-	private final double iconSize = 25;
+	private final double iconSize = 50;
 	
 	public CoolDownDisplay(int side,BaseShooter owner){
 		if(side == 0)this.x = 20;
-		else this.x = 725;
+		else this.x = 680;
 		
 		this.y = 50;
 		this.z = -80;
@@ -28,7 +29,7 @@ public class CoolDownDisplay extends Entity{
 		atkRatio = ((System.nanoTime()-owner.getAtkTimer())/1000000000)/owner.atkCD;
 		gc.setFill(Color.GOLD);//For insert icon
 		gc.fillRoundRect(x, y, iconSize, iconSize, 5, 5);
-		
+		gc.drawImage(RenderableHolder.bullet_icon,x,y);
 		if(atkRatio<1) {
 			gc.setFill(Color.LIGHTSKYBLUE);
 			gc.fillRect(x, y, iconSize, iconSize*(1-atkRatio));
@@ -45,8 +46,9 @@ public class CoolDownDisplay extends Entity{
 		}
 		
 		bombRatio = ((System.nanoTime()-owner.getBombTimer())/1000000000)/owner.bombCD;
-		gc.setFill(Color.BLACK);//For Insert Icon
+		gc.setFill(Color.HOTPINK);//For Insert Icon
 		gc.fillRoundRect(x + (iconSize+5), y, iconSize, iconSize, 5, 5);
+		gc.drawImage(RenderableHolder.bomb_icon,x + (iconSize+5),y);
 		
 		if(bombRatio<1) {
 			gc.setFill(Color.LIGHTSKYBLUE);
