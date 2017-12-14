@@ -54,7 +54,13 @@ public class GameLogic {
 		addNewObject(p1);
 		addNewObject(p2);
 		addNewObject(timer);
+<<<<<<< HEAD
 
+||||||| merged common ancestors
+
+		GameSound.fightTheme.setVolume(0.1);
+=======
+>>>>>>> 98a57b3962b7ef67c7cef22ead6e659759c2b9fb
 		GameSound.fightTheme.play();
 	}
 	
