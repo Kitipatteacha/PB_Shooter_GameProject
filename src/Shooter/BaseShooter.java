@@ -169,7 +169,6 @@ public abstract class BaseShooter extends CollidableEntity{
 	}
 	
 	protected void loadAnimate(String charName) {
-		System.out.println(ClassLoader.getSystemResource(charName + "_L_" + "0" + ".png").toString()+"=======>"+nNormalPic);
 		Image[] normalArray = new Image[nNormalPic];
 		Image[] warpArray = new Image[nWarpPic];
 		
