@@ -15,8 +15,8 @@ public class RenderableHolder {
 	private Comparator<IRenderable> comparator;
 	public static Image Background;
 	public static Image Ground;
-	public static AudioClip  explosionSound;
-	
+	public static AudioClip  shotSound;
+	public static AudioClip  winSound;
 	static {
 		loadResource();
 	}
@@ -37,7 +37,8 @@ public class RenderableHolder {
 	public static void loadResource() {
 		Background = new Image(ClassLoader.getSystemResource("Back.png").toString());
 		Ground = new Image(ClassLoader.getSystemResource("ground.png").toString(),800,300,false,false);
-		explosionSound = new AudioClip(ClassLoader.getSystemResource("Explosion.wav").toString());
+		shotSound = new AudioClip(ClassLoader.getSystemResource("Shot_sound.wav").toString());
+		winSound = new AudioClip(ClassLoader.getSystemResource("Win_sound.wav").toString());
 		
 	}
 

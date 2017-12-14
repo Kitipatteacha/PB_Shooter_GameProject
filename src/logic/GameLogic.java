@@ -68,6 +68,7 @@ public class GameLogic {
 	}
 	
 	public String getWinner() {
+		RenderableHolder.winSound.play();
 		if(p1.getHp()>p2.getHp()) {
 			return "P1";
 		}
