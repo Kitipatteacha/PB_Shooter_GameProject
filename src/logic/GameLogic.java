@@ -5,12 +5,15 @@ import java.util.List;
 
 import Shooter.Balloon;
 import Shooter.BaseShooter;
+import Shooter.RockMan;
+import input.InputUtility;
+import javafx.scene.input.KeyCode;
 import sharedObject.RenderableHolder;
 
 public class GameLogic {
 	private static List<Entity> gameObjectContainer;
 	
-	public boolean gameEnd;
+	public boolean gameEnd,gamePause;
 	public static Timer timer;
 	private Ground ground;
 	private static BaseShooter p1;
@@ -24,10 +27,17 @@ public class GameLogic {
 		RenderableHolder.getInstance().add(field);
 		
 		gameEnd= false;
+		gamePause = false;
 		timer = new Timer(60);
 		ground = new Ground(100,100);
-		p1 = new Balloon(0);
+		
+		
+		
+		p1 = new RockMan(0);
 		p2 = new Balloon(1);
+		
+		
+		
 		addNewObject(ground);
 		addNewObject(p1);
 		addNewObject(p2);
@@ -40,21 +50,32 @@ public class GameLogic {
 	}
 	
 	public void logicUpdate(){
-		for(int i = GameLogic.gameObjectContainer.size()-1;i>=0;i--) {
-			if(GameLogic.gameObjectContainer.get(i).isDestroyed()) {
-				GameLogic.gameObjectContainer.remove(i);
-			}
-			else {
-				GameLogic.gameObjectContainer.get(i).update();
-			}
+		if (InputUtility.getKeyPressed(KeyCode.ESCAPE)) {
+			if(gamePause == false)gamePause = true;
+			else gamePause=false;
+			InputUtility.remove(KeyCode.ESCAPE);
 		}
-		if(p1.getHp()<=0 || p2.getHp()<=0 || timer.getTime()<=0) {
-			gameEnd = true;
+		if(!gamePause) {
+			for(int i = GameLogic.gameObjectContainer.size()-1;i>=0;i--) {
+				if(GameLogic.gameObjectContainer.get(i).isDestroyed()) {
+					GameLogic.gameObjectContainer.remove(i);
+				}
+				else {
+					GameLogic.gameObjectContainer.get(i).update();
+				}
+			}
+			if(p1.getHp()<=0 || p2.getHp()<=0 || timer.getTime()<=0) {
+				gameEnd = true;
+			}
 		}
 	}
 	
 	public boolean isGameEnd() {
 		return gameEnd;
+	}
+	
+	public boolean isGamePause() {
+		return gamePause;
 	}
 
 	public static BaseShooter getOpponentOf(BaseShooter shooter) {

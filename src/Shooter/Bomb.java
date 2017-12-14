@@ -1,8 +1,10 @@
-package logic;
+package Shooter;
 
-import Shooter.BaseShooter;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import logic.CollidableEntity;
+import logic.GameLogic;
+import logic.Ground;
 
 public class Bomb extends CollidableEntity{
 
@@ -47,7 +49,7 @@ public class Bomb extends CollidableEntity{
 		if(this.y > Ground.getPosY(lane)) {
 			
 			if(target.getCol()==this.col && target.getLane() == this.lane) {
-				owner.attack(target,this);
+				owner.doDamage(target,this);
 			}
 			isThrow = false;
 			destroyed = true;

@@ -11,7 +11,7 @@ import com.sun.javafx.tk.Toolkit;
 public class HealthBar extends Entity{
 	public double hpRatio;
 	public int side;
-	private BaseShooter shooter;
+	private BaseShooter owner;
 	private Font TEXT_FONT = new Font("Monospace", 25);
 	private double text_width;
 	FontLoader fl= Toolkit.getToolkit().getFontLoader();
@@ -23,22 +23,24 @@ public class HealthBar extends Entity{
 		this.y = 20;
 		this.z = -100;
 		this.side = side;
-		this.shooter = sh;
+		this.owner = sh;
 	}
 	
 	@Override
 	public void draw(GraphicsContext gc) {
-		hpRatio = shooter.getHp()/shooter.getMaxHp();
-		text_width = fl.computeStringWidth(""+shooter.getHp(), TEXT_FONT);
+		hpRatio = owner.getHp()/owner.getMaxHp();
+		text_width = fl.computeStringWidth(""+owner.getHp(), TEXT_FONT);
 		if(side == 0) {
 			
-			gc.setFill(Color.RED);
+			gc.setFill(Color.CORNFLOWERBLUE);
 			gc.setStroke(Color.BLACK);
 			gc.setLineWidth(3);
 			gc.fillRect(x, y, 300, 25);
 			gc.strokeRect(x, y, 300, 25);
 			
 			gc.setFill(Color.LAWNGREEN);
+			if(owner.getHp()<owner.getMaxHp()*0.4)gc.setFill(Color.ORANGE);
+			if(owner.getHp()<owner.getMaxHp()*0.2)gc.setFill(Color.RED);
 			gc.setStroke(Color.BLACK);
 			gc.setLineWidth(3);
 			gc.fillRect(x, y, hpRatio*300, 25);
@@ -46,16 +48,18 @@ public class HealthBar extends Entity{
 			
 			gc.setFont(TEXT_FONT);
 			gc.setFill(Color.GREY);
-			gc.fillText(""+(int)shooter.getHp(), 25, 42);
+			gc.fillText(""+(int)owner.getHp(), 25, 42);
 		}
 		else {
 			gc.setFill(Color.LAWNGREEN);
+			if(owner.getHp()<owner.getMaxHp()*0.4)gc.setFill(Color.ORANGE);
+			if(owner.getHp()<owner.getMaxHp()*0.2)gc.setFill(Color.RED);
 			gc.setStroke(Color.BLACK);
 			gc.setLineWidth(3);
 			gc.fillRect(x, y, 300, 25);
 			gc.strokeRect(x, y, 300, 25);
 			
-			gc.setFill(Color.RED);
+			gc.setFill(Color.CORNFLOWERBLUE);
 			gc.setStroke(Color.BLACK);
 			gc.setLineWidth(3);
 			gc.fillRect(x, y, (1-hpRatio)*300, 25);
@@ -63,7 +67,7 @@ public class HealthBar extends Entity{
 			
 			gc.setFont(TEXT_FONT);
 			gc.setFill(Color.GREY);
-			gc.fillText(""+(int)shooter.getHp(), 800-text_width, 42);
+			gc.fillText(""+(int)owner.getHp(), 800-text_width, 42);
 		}
 		
 	}
