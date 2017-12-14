@@ -10,6 +10,9 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import window.SceneManager;
 
 
@@ -24,11 +27,13 @@ public class CharacterSelect extends AnchorPane{
 	public ImageView picP1 = new ImageView();
 	public Image[] p1Array;
 	public boolean p1Lock = false;
+	public Text p1Status = new Text();
 	
 	public ImageView conP2 = new ImageView();
 	public ImageView picP2 = new ImageView();
 	public Image[] p2Array;
 	public boolean p2Lock = false;
+	public Text p2Status = new Text();
 	
 	public static int p1Choice = 0;
 	public static int p2Choice = 0;
@@ -44,15 +49,27 @@ public class CharacterSelect extends AnchorPane{
 		name.add("Ninja");
 		name.add("Robot");
 		
-		this.getChildren().addAll(picP1,picP2,conP1,conP2);
+		p1Status.setFill(Color.WHITE);
+		p1Status.setFont(new Font("Tahoma",25));
+		p1Status.setText(name.get(p1Choice));
+		
+		p2Status.setFill(Color.WHITE);
+		p2Status.setFont(new Font("Tahoma",25));
+		p2Status.setText(name.get(p2Choice));
+		
+		this.getChildren().addAll(picP1,picP2,conP1,conP2,p1Status,p2Status);
 		AnchorPane.setTopAnchor(picP1, 120.0);
 		AnchorPane.setLeftAnchor(picP1, 150.0);
 		AnchorPane.setTopAnchor(picP2, 120.0);
-		AnchorPane.setRightAnchor(picP2, 150.0);
+		AnchorPane.setRightAnchor(picP2, 120.0);
 		AnchorPane.setTopAnchor(conP1, 120.0);
 		AnchorPane.setLeftAnchor(conP1, 150.0);
 		AnchorPane.setTopAnchor(conP2, 120.0);
-		AnchorPane.setRightAnchor(conP2, 150.0);
+		AnchorPane.setRightAnchor(conP2, 120.0);
+		AnchorPane.setTopAnchor(p1Status, 350.0);
+		AnchorPane.setLeftAnchor(p1Status, 150.0);
+		AnchorPane.setTopAnchor(p2Status, 350.0);
+		AnchorPane.setRightAnchor(p2Status, 150.0);
 		picP1.setImage(p1Array[p1Choice]);
 		picP2.setImage(p2Array[p2Choice]);
 		
@@ -89,7 +106,7 @@ public class CharacterSelect extends AnchorPane{
 					if(p2Choice>0)p2Choice--;
 					picP2.setImage(p2Array[p2Choice]);
 				}
-				else if(event.getCode() == KeyCode.RIGHT && !p1Lock) {
+				else if(event.getCode() == KeyCode.RIGHT && !p2Lock) {
 					
 					if(p2Choice<3)p2Choice++;
 					picP2.setImage(p2Array[p2Choice]);

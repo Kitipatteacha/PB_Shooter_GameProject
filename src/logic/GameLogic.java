@@ -7,13 +7,8 @@ import Shooter.Balloon;
 import Shooter.BaseShooter;
 import Shooter.Egg;
 import Shooter.Ninja;
-<<<<<<< HEAD
 import Shooter.Robot;
 import arts.GameSound;
-||||||| merged common ancestors
-=======
-import Shooter.Robot;
->>>>>>> bb4fec662b5bcb55fcae16336d1d5789438ed40f
 import input.InputUtility;
 import javafx.scene.input.KeyCode;
 import scene.CharacterSelect;
@@ -43,27 +38,19 @@ public class GameLogic {
 		int p1Choice = CharacterSelect.p1Choice;
 		int p2Choice = CharacterSelect.p2Choice;
 		
+		System.out.println(p1Choice+"  "+p2Choice);
+		
 		if(p1Choice == 0)p1 = new Balloon(0);
 		else if (p1Choice == 1)p1 = new Egg(0);
-		else if (p1Choice == 1)p1 = new Ninja(0);
-		else if (p1Choice == 1)p1 = new Robot(0);
+		else if (p1Choice == 2)p1 = new Ninja(0);
+		else if (p1Choice == 3)p1 = new Robot(0);
 		
-<<<<<<< HEAD
 		if(p2Choice == 0)p2 = new Balloon(1);
 		else if (p2Choice == 1)p2 = new Egg(1);
 		else if (p2Choice == 2)p2 = new Ninja(1);
 		else if (p2Choice == 3)p2 = new Robot(1);
-||||||| merged common ancestors
-		p1 = new Ninja(0);
-		p2 = new Ninja(1);
 		
-		
-=======
-		p1 = new Robot(0);
-		p2 = new Robot(1);
-		
-		
->>>>>>> bb4fec662b5bcb55fcae16336d1d5789438ed40f
+		System.out.println(p1.getHp()+"  "+p2.getHp());
 		
 		addNewObject(ground);
 		addNewObject(p1);

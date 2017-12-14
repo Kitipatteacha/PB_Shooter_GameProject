@@ -10,7 +10,7 @@ public class Balloon extends BaseShooter{
 		this.nNormalPic = 9;
 		this.nWarpPic=5;
 		this.atk = 5;
-		this.atkCD = 0.4;
+		this.atkCD = 0.3;
 		loadAnimate("Balloon");
 	}
 
@@ -27,6 +27,7 @@ public class Balloon extends BaseShooter{
 		
 		if(bulletCount==3) {
 			heal(10);
+			bulletCount=0;
 		}
 	}
 	
