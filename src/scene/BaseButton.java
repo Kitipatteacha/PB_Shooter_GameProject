@@ -70,6 +70,7 @@ public class BaseButton extends Canvas {
 		gc.setFill(textColor);
 		gc.setFont(TEXT_FONT);
 		gc.fillText(text, (width-text_width)/2, 35);
+
 	}
 	
 	private void drawButtonEnter() {

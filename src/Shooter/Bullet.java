@@ -1,16 +1,18 @@
-package logic;
+package Shooter;
 
-import Shooter.BaseShooter;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import logic.CollidableEntity;
+import logic.GameLogic;
+import logic.Ground;
 
 public class Bullet extends CollidableEntity {
 	public boolean isShoot = false;
-	private int Bullet_direction ;
-	private int side;
-	private BaseShooter owner;
-	private BaseShooter target;
-	private double speed;
+	protected int Bullet_direction ;
+	protected int side;
+	protected BaseShooter owner;
+	protected BaseShooter target;
+	protected double speed;
 	
 	public Bullet(int side,int lane, int col,BaseShooter owner){
 		this.z = -10;
@@ -40,18 +42,18 @@ public class Bullet extends CollidableEntity {
 	public void draw(GraphicsContext gc) {
 		gc.setFill(Color.LAWNGREEN);
 		gc.fillOval(x, y, 25, 20);
-		if(isShoot) {
-			x+=speed*Bullet_direction;
-		}
-		if(x>800 || x<0) {
-			isShoot = false;
-			destroyed = true;
-		}
 	}
 	
 	public void update() {
 		if(this.collideWith(target)) {
-			owner.attack(target,this);
+			owner.doDamage(target,this);
+			isShoot = false;
+			destroyed = true;
+		}
+		if(isShoot) {
+			x+=speed*Bullet_direction;
+		}
+		if(x>800 || x<0) {
 			isShoot = false;
 			destroyed = true;
 		}
@@ -64,4 +66,7 @@ public class Bullet extends CollidableEntity {
 		this.hitboxH = 25;
 	};
 	
+	public void setSpeed(double speed) {
+		this.speed = speed;
+	}
 }

@@ -11,11 +11,12 @@ public class Start extends StackPane{
 	GameScreen gameScreen;
 	AnimationTimer animation = new AnimationTimer() {
 		public void handle(long now) {
-			gameScreen.paintComponent();
+			if(!logic.isGamePause())gameScreen.paintComponent();
 			if(logic.isGameEnd()) {
 				gameScreen.drawResult(logic.getWinner());
 				stopGame();
 			}
+			
 			logic.logicUpdate();
 			RenderableHolder.getInstance().update();
 		}

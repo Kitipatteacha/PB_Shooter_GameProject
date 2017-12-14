@@ -4,24 +4,27 @@ import input.InputUtility;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
-import logic.Bomb;
-import logic.Bullet;
 import logic.CollidableEntity;
+import logic.CoolDownDisplay;
 import logic.GameLogic;
 import logic.Ground;
 import logic.HealthBar;
 import sharedObject.AnimatedImage;
 
 public abstract class BaseShooter extends CollidableEntity{
-	protected AnimatedImage normal_Animation = new AnimatedImage();
-	protected AnimatedImage warp_Animation = new AnimatedImage();
+	private AnimatedImage normal_Animation = new AnimatedImage();
+	private AnimatedImage warp_Animation = new AnimatedImage();
 	private boolean warp = false;
+	
     protected int side ;//0 = left, 1 = right
     protected HealthBar hpBar;
+    protected CoolDownDisplay cdBar;
     protected KeyCode up,down,left,right,fire,bomb;
     protected double imageW=110,imageH=210;
     protected double atkTimer=0;
     protected double bombTimer=0;
+    protected boolean movable = true;
+    protected boolean shootable = true;
    
     public double maxHp;
     public double hp;
@@ -66,6 +69,7 @@ public abstract class BaseShooter extends CollidableEntity{
 		this.atkTimer = -1;
 		this.bombTimer = -1;
 		this.hpBar = new HealthBar(side,this);
+		this.cdBar = new CoolDownDisplay(side,this);
 		
 		loadAnimate(pic);
 	}
@@ -78,55 +82,55 @@ public abstract class BaseShooter extends CollidableEntity{
 		this.hitboxH = this.imageH*0.75;
 	}
 
-	private void up() {
-		if(lane-1>0) {
+	protected void up() {
+		if(lane-1>0&&movable) {
 			this.lane -=1;
 			this.y = Ground.getPosY(lane)-imageH;
 		}
 	}
-	private void down() {
-		if(lane+1<=3) {
+	protected void down() {
+		if(lane+1<=3&&movable) {
 			this.lane +=1;
 			this.y = Ground.getPosY(lane)-imageH;
 		}
 	}
-	private void left() {
-		if(col-1>0) {
+	protected void left() {
+		if(col-1>0&&movable) {
 			this.col-=1;
 			this.x = Ground.getPosX(col, side)-imageW/2;
 		}
 	}
-	private void right() {
-		if(col+1<=3) {
+	protected void right() {
+		if(col+1<=3&&movable) {
 			this.col+=1;
 			this.x = Ground.getPosX(col, side)-imageW/2;
 		}
 	}
 	
-	private void throwBomb() {
-		if((System.nanoTime()-this.bombTimer)/1000000000 >= this.bombCD) {
+	protected void throwBomb() {
+		if((System.nanoTime()-this.bombTimer)/1000000000 >= this.bombCD && shootable) {
 			this.bombTimer = System.nanoTime();
 			GameLogic.addNewObject(new Bomb(side,lane,col,this));
 		}
 	}
 
-	private void shoot() {
-		if((System.nanoTime()-this.atkTimer)/1000000000 >= this.atkCD) {
+	protected void shoot() {
+		if((System.nanoTime()-this.atkTimer)/1000000000 >= this.atkCD && shootable) {
 			this.atkTimer = System.nanoTime();
 			GameLogic.addNewObject(new Bullet(side,lane,col,this));
 		}
 	}
 
-	public void attack(BaseShooter other,CollidableEntity way) {
+	protected void doDamage(BaseShooter other,CollidableEntity way) {
 		double totalAtk;
 		totalAtk = atk;//Attack Calculation
-		if(way instanceof Bomb)totalAtk=atk*3;
+		if(way instanceof Bomb)totalAtk=bombDmg;
 		if(way instanceof Bullet)totalAtk=atk;
 		
 		other.takeDamage(totalAtk);
 	}
 	
-	public double takeDamage(double dmg) {
+	protected double takeDamage(double dmg) {
 		double totalDmg;
 		totalDmg = dmg;//Damage Calculation
 		
@@ -136,12 +140,21 @@ public abstract class BaseShooter extends CollidableEntity{
 		return totalDmg;
 	}
 	
-	public void heal(double amount) {
+	protected void heal(double amount) {
 		if(amount<0)amount=0;
 		if(this.hp+amount>this.maxHp) {
 			this.hp = this.maxHp;
 		}
 		else this.hp +=amount;
+	}
+	
+	protected void stunt() {
+		this.movable = false;
+		this.shootable = false;
+	}
+	
+	protected void snare() {
+		this.movable = false;
 	}
 	
 	private void loadAnimate(String charName) {
@@ -161,7 +174,7 @@ public abstract class BaseShooter extends CollidableEntity{
 				normalArray[i] = new Image(ClassLoader.getSystemResource(charName + "_R_" + i + ".png").toString() );
 			}
 			for (int i = 0; i < 5; i++) {
-				warpArray[i] = new Image(ClassLoader.getSystemResource(charName + "_R_" + i + ".png").toString() );
+				warpArray[i] = new Image(ClassLoader.getSystemResource(charName + "_R_"+ "Warp_" + i + ".png").toString() );
 	        }
 		}
 		normal_Animation.frames = normalArray;
@@ -213,6 +226,7 @@ public abstract class BaseShooter extends CollidableEntity{
 	    			warp = false;
 	    }
 		hpBar.draw(gc);
+		cdBar.draw(gc);
 	}
 
 	public double getMaxHp() {
@@ -226,6 +240,15 @@ public abstract class BaseShooter extends CollidableEntity{
 	public int getSide() {
 		return side;
 	}
+
+	public double getAtkTimer() {
+		return atkTimer;
+	}
+
+	public double getBombTimer() {
+		return bombTimer;
+	}
+
 
 	
 }
