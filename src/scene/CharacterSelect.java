@@ -76,8 +76,7 @@ public class CharacterSelect extends AnchorPane{
 		VBox control = new VBox();
 		BaseButton back = new BaseButton("Back");
 		back.setGoToScene("MainMenu");
-		BaseButton Play = new BaseButton("Play");
-		control.getChildren().addAll(Play,back);
+		control.getChildren().addAll(back);
 		
 		this.getChildren().add(control);
 		AnchorPane.setBottomAnchor(control, 10.0);
