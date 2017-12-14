@@ -60,6 +60,9 @@ public class CharacterSelect extends AnchorPane{
 		p2Status.setFont(new Font("Tahoma",25));
 		p2Status.setText(name.get(p2Choice));
 		
+		conP1.setImage(confirm);
+		conP2.setImage(confirm);
+		
 		this.getChildren().addAll(picP1,picP2,conP1,conP2,p1Status,p2Status);
 		AnchorPane.setTopAnchor(picP1, 120.0);
 		AnchorPane.setLeftAnchor(picP1, 150.0);
@@ -119,12 +122,12 @@ public class CharacterSelect extends AnchorPane{
 				}
 				else if(event.getCode() == KeyCode.B) {
 					p1Lock = true;
-					conP1.setImage(confirm);
+					conP1.setVisible(true);
 					nextScene();
 				}
 				else if(event.getCode() == KeyCode.P) {
 					p2Lock = true;
-					conP2.setImage(confirm);
+					conP2.setVisible(true);
 					nextScene();
 				}
 			}
@@ -160,6 +163,7 @@ public class CharacterSelect extends AnchorPane{
 		p2Lock = false;
 		picP1.setImage(p1Array[p1Choice]);
 		picP2.setImage(p2Array[p2Choice]);
-		
+		conP1.setVisible(false);
+		conP2.setVisible(false);
 	}
 }
