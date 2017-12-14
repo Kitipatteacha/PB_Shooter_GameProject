@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-
 import javafx.scene.image.Image;
-import javafx.scene.media.AudioClip;
 
 public class RenderableHolder {
 	private static final RenderableHolder instance = new RenderableHolder();

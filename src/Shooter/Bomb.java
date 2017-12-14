@@ -8,18 +8,18 @@ import logic.Ground;
 import sharedObject.AnimatedImage;
 
 public class Bomb extends CollidableEntity{
-	private AnimatedImage bomb_Animation = new AnimatedImage();
-	private Image bomb = new Image(ClassLoader.getSystemResource("bomb.png").toString());
+	protected AnimatedImage bomb_Animation = new AnimatedImage();
+	protected Image bomb = new Image(ClassLoader.getSystemResource("bomb.png").toString());
 
-	public boolean isThrow = false;
-	private int Bomb_direction ;
-	private int side;
-	private BaseShooter owner;
-	private BaseShooter target;
-	private double posYTimer=0;
-	private double speed;
-	private double speedX;
-	private double speedY;
+	protected boolean isThrow = false;
+	protected int Bomb_direction ;
+	protected int side;
+	protected BaseShooter owner;
+	protected BaseShooter target;
+	protected double posYTimer=0;
+	protected double speed;
+	protected double speedX;
+	protected double speedY;
 	
 	public Bomb(int side,int lane, int col,BaseShooter owner){
 		this.z = -15;

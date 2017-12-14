@@ -22,6 +22,7 @@ public class CharacterSelect extends AnchorPane{
 	public Image confirm = new Image(ClassLoader.getSystemResource("confirm.png").toString());
 	
 	public ArrayList<String> name = new ArrayList<String>();
+	public ArrayList<String> description = new ArrayList<String>();
 
 	public ImageView conP1 = new ImageView();
 	public ImageView picP1 = new ImageView();
@@ -48,6 +49,8 @@ public class CharacterSelect extends AnchorPane{
 		name.add("Egg");
 		name.add("Ninja");
 		name.add("Robot");
+		
+		description.add("Every third ");
 		
 		p1Status.setFill(Color.WHITE);
 		p1Status.setFont(new Font("Tahoma",25));
@@ -92,21 +95,25 @@ public class CharacterSelect extends AnchorPane{
 			public void handle(KeyEvent event) {
 				if(event.getCode() == KeyCode.A && !p1Lock) {
 					if(p1Choice>0)p1Choice--;
+					else p1Choice=3;
 					picP1.setImage(p1Array[p1Choice]);
 					p1Status.setText(name.get(p1Choice));
 				}
 				else if(event.getCode() == KeyCode.D && !p1Lock) {
 					if(p1Choice<3)p1Choice++;
+					else p1Choice = 0;
 					picP1.setImage(p1Array[p1Choice]);
 					p1Status.setText(name.get(p1Choice));
 				}
 				else if(event.getCode() == KeyCode.LEFT && !p2Lock) {
 					if(p2Choice>0)p2Choice--;
+					else p2Choice = 3;
 					picP2.setImage(p2Array[p2Choice]);
 					p2Status.setText(name.get(p2Choice));
 				}
 				else if(event.getCode() == KeyCode.RIGHT && !p2Lock) {
 					if(p2Choice<3)p2Choice++;
+					else p2Choice=0;
 					picP2.setImage(p2Array[p2Choice]);
 					p2Status.setText(name.get(p2Choice));
 				}
@@ -144,5 +151,14 @@ public class CharacterSelect extends AnchorPane{
 		p2Array[1] = new Image(ClassLoader.getSystemResource("P2_1.png").toString());
 		p2Array[2] = new Image(ClassLoader.getSystemResource("P2_2.png").toString());
 		p2Array[3] = new Image(ClassLoader.getSystemResource("P2_3.png").toString());
+	}
+	
+	public void reset() {
+		p1Choice = 0;
+		p2Choice = 0;
+		p1Lock = false;
+		p2Lock = false;
+		picP1.setImage(p1Array[p1Choice]);
+		picP2.setImage(p2Array[p2Choice]);
 	}
 }

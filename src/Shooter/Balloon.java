@@ -1,6 +1,7 @@
 package Shooter;
 
 import logic.CollidableEntity;
+import logic.GameLogic;
 
 public class Balloon extends BaseShooter{
 	private int bulletCount=0;
@@ -9,8 +10,9 @@ public class Balloon extends BaseShooter{
 		super(side);
 		this.nNormalPic = 9;
 		this.nWarpPic=5;
-		this.atk = 5;
-		this.atkCD = 0.3;
+		
+		this.atk = 15;
+		this.atkCD = 0.5;
 		loadAnimate("Balloon");
 	}
 
@@ -31,4 +33,10 @@ public class Balloon extends BaseShooter{
 		}
 	}
 	
+	protected void shoot() {
+		if((System.nanoTime()-this.atkTimer)/1000000000 >= this.atkCD && shootable) {
+			this.atkTimer = System.nanoTime();
+			GameLogic.addNewObject(new BalloonBullet(side,lane,col,this));
+		}
+	}
 }

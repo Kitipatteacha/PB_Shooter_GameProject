@@ -14,10 +14,9 @@ import logic.HealthBar;
 import sharedObject.AnimatedImage;
 
 public abstract class BaseShooter extends CollidableEntity{
-	private AnimatedImage normal_Animation = new AnimatedImage();
-	private AnimatedImage warp_Animation = new AnimatedImage();
-	private boolean warp = false;
-	
+	protected AnimatedImage normal_Animation = new AnimatedImage();
+	protected AnimatedImage warp_Animation = new AnimatedImage();
+	protected boolean warp = false;
     protected int side ;//0 = left, 1 = right
     protected HealthBar hpBar;
     protected CoolDownDisplay cdBar;
@@ -64,7 +63,7 @@ public abstract class BaseShooter extends CollidableEntity{
 		}
 		
 		//Character Status Area
-		this.maxHp = 300;
+		this.maxHp = 250;
 		this.hp = this.maxHp;
 		this.atk = 20;
 		this.atkCD = 0.300;//Attack cool down (second)

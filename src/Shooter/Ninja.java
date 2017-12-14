@@ -1,13 +1,14 @@
 package Shooter;
 
-import javafx.scene.image.Image;
 import logic.CollidableEntity;
 import logic.GameLogic;
 import logic.Ground;
 
 public class Ninja extends BaseShooter{
+	
 	private int charge = 0;
-	private final double damagePerCharge = 0.8; 
+	private final double damagePerCharge = 1.2; 
+	
 	public Ninja(int side) {
 		super(side);
 		this.imageW=132;
@@ -19,7 +20,7 @@ public class Ninja extends BaseShooter{
 		this.maxHp = 200;
 		this.hp = 200;
 		this.bombDmg = 15;
-		this.atk = 5;
+		this.atk = 8;
 		this.atkCD = 0.8;
 		loadAnimate("Ninja");
 	}

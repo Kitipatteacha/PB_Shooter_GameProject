@@ -17,12 +17,12 @@ public class SceneManager {
 	public static MainMenu mainMenu = new MainMenu();
 	public static Credit credit = new Credit();
 	public static HowTo howTo = new HowTo();
-	public static CharacterSelect select ;
+	public static CharacterSelect select = new CharacterSelect();
 	public static Start start;
 	
 	public static Scene creditScene = new Scene(credit,SCENE_WIDTH,SCENE_HEIGHT);
 	public static Scene mainMenuScene = new Scene(mainMenu,SCENE_WIDTH,SCENE_HEIGHT);
-	public static Scene CharacterScene;
+	public static Scene CharacterScene = new Scene(select,SCENE_WIDTH,SCENE_HEIGHT);
 	public static Scene startScene;
 	public static Scene howToScene = new Scene(howTo,SCENE_WIDTH,SCENE_HEIGHT);
 	
@@ -44,8 +44,7 @@ public class SceneManager {
 			primaryStage.show();
 		}
 		else if(goTo.equals("Start")){
-			select = new CharacterSelect();
-			CharacterScene = new Scene(select,SCENE_WIDTH,SCENE_HEIGHT);
+			select.reset();
 			select.requestFocus();
 			primaryStage.setScene(CharacterScene);
 			primaryStage.show();
