@@ -2,11 +2,16 @@ package logic;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import Shooter.Balloon;
 import Shooter.BaseShooter;
+import Shooter.Egg;
 import Shooter.Ninja;
+import Shooter.Robot;
 import arts.GameSound;
 import input.InputUtility;
 import javafx.scene.input.KeyCode;
+import scene.CharacterSelect;
 import sharedObject.RenderableHolder;
 
 public class GameLogic {
@@ -30,12 +35,18 @@ public class GameLogic {
 		timer = new Timer(60);
 		ground = new Ground(100,100);
 		
+		int p1Choice = CharacterSelect.p1Choice;
+		int p2Choice = CharacterSelect.p2Choice;
 		
+		if(p1Choice == 0)p1 = new Balloon(0);
+		else if (p1Choice == 1)p1 = new Egg(0);
+		else if (p1Choice == 1)p1 = new Ninja(0);
+		else if (p1Choice == 1)p1 = new Robot(0);
 		
-		p1 = new Ninja(0);
-		p2 = new Ninja(1);
-		
-		
+		if(p2Choice == 0)p2 = new Balloon(1);
+		else if (p2Choice == 1)p2 = new Egg(1);
+		else if (p2Choice == 2)p2 = new Ninja(1);
+		else if (p2Choice == 3)p2 = new Robot(1);
 		
 		addNewObject(ground);
 		addNewObject(p1);
