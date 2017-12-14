@@ -13,7 +13,7 @@ public class Main extends Application {
 			SceneManager.initialize(primaryStage);
 			SceneManager.gotoSceneOf("MainMenu");
 			primaryStage.setResizable(false);
-			primaryStage.setTitle("Paint Ball");
+			primaryStage.setTitle("PB : GO");
 			primaryStage.centerOnScreen();
 		} catch(Exception e) {
 			e.printStackTrace();

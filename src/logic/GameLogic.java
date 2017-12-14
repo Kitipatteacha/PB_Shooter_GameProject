@@ -5,7 +5,7 @@ import java.util.List;
 
 import Shooter.Balloon;
 import Shooter.BaseShooter;
-import Shooter.RockMan;
+import Shooter.Egg;
 import input.InputUtility;
 import javafx.scene.input.KeyCode;
 import sharedObject.RenderableHolder;
@@ -33,7 +33,7 @@ public class GameLogic {
 		
 		
 		
-		p1 = new RockMan(0);
+		p1 = new Egg(0);
 		p2 = new Balloon(1);
 		
 		

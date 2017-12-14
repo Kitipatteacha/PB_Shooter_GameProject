@@ -4,6 +4,8 @@ import input.InputUtility;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import logic.CollidableEntity;
 import logic.CoolDownDisplay;
 import logic.GameLogic;
@@ -20,11 +22,14 @@ public abstract class BaseShooter extends CollidableEntity{
     protected HealthBar hpBar;
     protected CoolDownDisplay cdBar;
     protected KeyCode up,down,left,right,fire,bomb;
+    protected int nNormalPic,nWarpPic;
     protected double imageW=110,imageH=210;
-    protected double atkTimer=0;
-    protected double bombTimer=0;
     protected boolean movable = true;
     protected boolean shootable = true;
+    protected double atkTimer=0;
+    protected double bombTimer=0;
+    protected double immovableTimer;
+    protected double unshootableTimer;
    
     public double maxHp;
     public double hp;
@@ -33,7 +38,7 @@ public abstract class BaseShooter extends CollidableEntity{
     public double bombDmg;
     public double bombCD;
     
-	public BaseShooter(int side,String pic) {
+	public BaseShooter(int side) {
 		this.radius = 60;
 		this.side = side;
 		this.lane = 2;
@@ -71,11 +76,9 @@ public abstract class BaseShooter extends CollidableEntity{
 		this.hpBar = new HealthBar(side,this);
 		this.cdBar = new CoolDownDisplay(side,this);
 		
-		loadAnimate(pic);
 	}
 	
 	public void calculateHitbox() {
-		// TODO Auto-generated method stub
 		this.hitboxX = this.x + 10;
 		this.hitboxY = this.y + 50;
 		this.hitboxW = this.imageW*0.75;
@@ -148,32 +151,43 @@ public abstract class BaseShooter extends CollidableEntity{
 		else this.hp +=amount;
 	}
 	
-	protected void stunt() {
+	protected void stunt(double durationSecond) {
 		this.movable = false;
 		this.shootable = false;
+		this.immovableTimer = System.nanoTime()+(durationSecond*1000000000);
+		this.unshootableTimer = System.nanoTime()+(durationSecond*1000000000);
 	}
 	
-	protected void snare() {
+	protected void snare(double durationSecond) {
 		this.movable = false;
+		this.immovableTimer = System.nanoTime()+(durationSecond*1000000000);
 	}
 	
-	private void loadAnimate(String charName) {
-		Image[] normalArray = new Image[9];
-		Image[] warpArray = new Image[5];
+	protected void disarm(double durationSecond) {
+		this.shootable = false;
+		this.unshootableTimer = System.nanoTime()+(durationSecond*1000000000);
+	}
+	
+	protected void loadAnimate(String charName) {
+		System.out.println(ClassLoader.getSystemResource(charName + "_L_" + "0" + ".png").toString()+"=======>"+nNormalPic);
+		Image[] normalArray = new Image[nNormalPic];
+		Image[] warpArray = new Image[nWarpPic];
 		
 		if(side == 0) {
-			for (int i = 0; i < 9; i++) {
+			for (int i = 0; i < nNormalPic; i++) {
+				System.out.println(ClassLoader.getSystemResource(charName + "_L_" + i + ".png").toString());
 				normalArray[i] = new Image(ClassLoader.getSystemResource(charName + "_L_" + i + ".png").toString() );
+				
 			}
-			for (int i = 0; i < 5; i++) {
+			for (int i = 0; i < nWarpPic; i++) {
 				warpArray[i] = new Image(ClassLoader.getSystemResource(charName + "_L_" + "Warp_" + i + ".png").toString() );
 	        }
 		}
 		else {
-			for (int i = 0; i < 9; i++) {
+			for (int i = 0; i < nNormalPic; i++) {
 				normalArray[i] = new Image(ClassLoader.getSystemResource(charName + "_R_" + i + ".png").toString() );
 			}
-			for (int i = 0; i < 5; i++) {
+			for (int i = 0; i < nWarpPic; i++) {
 				warpArray[i] = new Image(ClassLoader.getSystemResource(charName + "_R_"+ "Warp_" + i + ".png").toString() );
 	        }
 		}
@@ -212,19 +226,36 @@ public abstract class BaseShooter extends CollidableEntity{
 			throwBomb();
 			InputUtility.remove(bomb);
 		} 
+		if(this.movable == false && this.immovableTimer-System.nanoTime()<0) {
+			this.movable = true;
+		}
+		if(this.shootable == false && this.unshootableTimer-System.nanoTime()<0) {
+			this.shootable = true;
+		}
 	}
 
 	@Override
 	public void draw(GraphicsContext gc) {
-		// TODO Auto-generated method stub
 		double t = System.nanoTime() / 1100000000.0;
-		if(warp == false) 
-			gc.drawImage(normal_Animation.getFrame(t), x,  y );
-		else if(warp == true) {
-	    		gc.drawImage(warp_Animation.getFrame(t), x,  y);
-	    		if(warp_Animation.getIndex()==4)
-	    			warp = false;
-	    }
+		if(movable) {
+			if(warp == false) 
+				gc.drawImage(normal_Animation.getFrame(t), x,  y );
+			else if(warp == true) {
+		    		gc.drawImage(warp_Animation.getFrame(t), x,  y);
+		    		if(warp_Animation.getIndex()==nWarpPic-1)
+		    			warp = false;
+		    }
+		}
+		else {
+			gc.drawImage(normal_Animation.getFrame(1100000000), x,  y );
+			gc.setFill(Color.WHITE);
+			gc.setFont(new Font("Monospace", 30));
+			gc.fillText("Stunt", x+20, y+60);
+			
+			gc.setStroke(Color.BLACK);
+			gc.setLineWidth(0.5);
+			gc.strokeText("Stunt", x+20, y+60);
+		}
 		hpBar.draw(gc);
 		cdBar.draw(gc);
 	}

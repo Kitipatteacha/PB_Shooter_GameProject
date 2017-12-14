@@ -3,9 +3,9 @@ package Shooter;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
-public class RockManBullet extends Bullet{
+public class EggBullet extends Bullet{
 
-	public RockManBullet(int side, int lane, int col, BaseShooter owner) {
+	public EggBullet(int side, int lane, int col, BaseShooter owner) {
 		super(side, lane, col, owner);
 		this.speed = 15;
 	}
