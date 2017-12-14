@@ -30,7 +30,7 @@ public class GameSound {
 
 			@Override
 			public void run() {
-				winSound.play(0.1);
+				winSound.play(1);
 			}
 			
 		}).start();
@@ -41,7 +41,7 @@ public class GameSound {
 
 			@Override
 			public void run() {
-				fightTheme.play(0.1);
+				fightTheme.play();
 			}
 			
 		}).start();
