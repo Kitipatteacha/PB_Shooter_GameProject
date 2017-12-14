@@ -46,7 +46,7 @@ public class Egg extends BaseShooter{
 		totalAtk = atk;//Attack Calculation
 		if(way instanceof Bomb) {
 			totalAtk=bombDmg;
-			other.stunt(1);
+			other.stun(1);
 		}
 		if(way instanceof Bullet) {
 			totalAtk=atk;

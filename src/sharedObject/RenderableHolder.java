@@ -42,9 +42,9 @@ public class RenderableHolder {
 		Ground = new Image(ClassLoader.getSystemResource("ground.png").toString(),800,300,false,false);
 		shotSound = new AudioClip(ClassLoader.getSystemResource("Shot_sound.wav").toString());
 		winSound = new AudioClip(ClassLoader.getSystemResource("Win_sound.wav").toString());
-		fightTheme= new AudioClip(ClassLoader.getSystemResource("Fight_theme.mp3").toString());
-		bomb_icon  =new Image(ClassLoader.getSystemResource("bomb_icon.png").toString(),50,50,false,false);
-		bullet_icon  =new Image(ClassLoader.getSystemResource("bullet_icon.png").toString(),50,50,false,false);
+		fightTheme = new AudioClip(ClassLoader.getSystemResource("Fight_theme.mp3").toString());
+		bomb_icon  = new Image(ClassLoader.getSystemResource("bomb_icon.png").toString(),50,50,false,false);
+		bullet_icon  = new Image(ClassLoader.getSystemResource("bullet_icon.png").toString(),50,50,false,false);
 	}
 
 	public void add(IRenderable entity) {

@@ -35,13 +35,13 @@ public class CoolDownDisplay extends Entity{
 			gc.fillRect(x, y, iconSize, iconSize*(1-atkRatio));
 			
 			gc.setStroke(Color.RED);
-			gc.setLineWidth(1.5);
+			gc.setLineWidth(2.5);
 			gc.strokeRoundRect(x, y, iconSize, iconSize, 5, 5);
 			
 		}
 		else {
 			gc.setStroke(Color.GREEN);
-			gc.setLineWidth(1.5);
+			gc.setLineWidth(2.5);
 			gc.strokeRoundRect(x, y, iconSize, iconSize, 5, 5);
 		}
 		

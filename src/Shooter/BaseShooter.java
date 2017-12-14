@@ -152,7 +152,7 @@ public abstract class BaseShooter extends CollidableEntity{
 		else this.hp +=amount;
 	}
 	
-	protected void stunt(double durationSecond) {
+	protected void stun(double durationSecond) {
 		this.movable = false;
 		this.shootable = false;
 		this.immovableTimer = System.nanoTime()+(durationSecond*1000000000);
@@ -249,11 +249,11 @@ public abstract class BaseShooter extends CollidableEntity{
 			gc.drawImage(normal_Animation.getFrame(1100000000), x,  y );
 			gc.setFill(Color.WHITE);
 			gc.setFont(new Font("Monospace", 30));
-			gc.fillText("Stunt", x+20, y+60);
+			gc.fillText("Stun", x+20, y+60);
 			
 			gc.setStroke(Color.BLACK);
 			gc.setLineWidth(0.5);
-			gc.strokeText("Stunt", x+20, y+60);
+			gc.strokeText("Stun", x+20, y+60);
 		}
 		hpBar.draw(gc);
 		cdBar.draw(gc);
