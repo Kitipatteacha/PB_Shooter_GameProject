@@ -10,7 +10,6 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.AudioClip;
-import sharedObject.RenderableHolder;
 
 public class MainMenu extends VBox {
 	
@@ -58,12 +57,9 @@ public class MainMenu extends VBox {
 
 	public void stopMovingBG() {
 		movingBG.stop();
-		theme.stop();
 	}
 	
 	public void startMovingBG() {
 		movingBG.start();
-		theme.setVolume(0.1);
-		theme.play();
 	}
 }

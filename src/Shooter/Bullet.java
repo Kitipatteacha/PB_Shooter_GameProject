@@ -1,5 +1,6 @@
 package Shooter;
 
+import arts.GameSound;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import sharedObject.RenderableHolder;
@@ -36,8 +37,7 @@ public class Bullet extends CollidableEntity {
 		this.x = Ground.getPosX(col,side)-50;
 		this.y = Ground.getPosY(lane)-70;
 		isShoot = true;
-		RenderableHolder.shotSound.setVolume(0.1);
-		RenderableHolder.shotSound.play();
+		GameSound.playShotSound();
 	}
 
 	@Override

@@ -1,6 +1,7 @@
 package scene;
 
-import drawing.GameScreen;
+import arts.GameScreen;
+import arts.GameSound;
 import javafx.animation.AnimationTimer;
 import javafx.scene.layout.StackPane;
 import logic.GameLogic;
@@ -9,6 +10,7 @@ import sharedObject.RenderableHolder;
 public class Start extends StackPane{
 	GameLogic logic;
 	GameScreen gameScreen;
+	GameSound gameSound;
 	AnimationTimer animation = new AnimationTimer() {
 		public void handle(long now) {
 			if(!logic.isGamePause())gameScreen.paintComponent();
@@ -23,6 +25,7 @@ public class Start extends StackPane{
 	};
 	
 	public Start() {
+		gameSound = new GameSound();
 		logic = new GameLogic();
 		gameScreen = new GameScreen(800,600);
 		this.getChildren().add(gameScreen);

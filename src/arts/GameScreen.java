@@ -1,4 +1,4 @@
-package drawing;
+package arts;
 
 import input.InputUtility;
 import javafx.scene.canvas.Canvas;

@@ -2,11 +2,9 @@ package logic;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import Shooter.Balloon;
 import Shooter.BaseShooter;
-import Shooter.Egg;
 import Shooter.Ninja;
+import arts.GameSound;
 import input.InputUtility;
 import javafx.scene.input.KeyCode;
 import sharedObject.RenderableHolder;
@@ -43,6 +41,9 @@ public class GameLogic {
 		addNewObject(p1);
 		addNewObject(p2);
 		addNewObject(timer);
+
+		GameSound.fightTheme.setVolume(0.1);
+		GameSound.fightTheme.play();
 	}
 	
 	public static void addNewObject(Entity entity){
@@ -90,7 +91,7 @@ public class GameLogic {
 	}
 	
 	public String getWinner() {
-		RenderableHolder.winSound.play();
+		GameSound.playWinSound();
 		if(p1.getHp()>p2.getHp()) {
 			return "P1";
 		}

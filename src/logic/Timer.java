@@ -20,8 +20,6 @@ public class Timer extends Entity{
 		z = 50;
 		start = System.nanoTime();
 		this.time = countDown;
-		RenderableHolder.fightTheme.setVolume(0.1);
-		RenderableHolder.fightTheme.play();
 		
 	}
 	

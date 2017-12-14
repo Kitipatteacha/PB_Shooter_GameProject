@@ -1,5 +1,6 @@
 package window;
 
+import arts.GameSound;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import scene.Credit;
@@ -11,6 +12,7 @@ public class SceneManager {
 	private static Stage primaryStage;
 	public static final int SCENE_WIDTH = 800;
 	public static final int SCENE_HEIGHT = 600;
+	public static GameSound gameSound = new GameSound();
 	public static MainMenu mainMenu = new MainMenu();
 	public static Credit credit = new Credit();
 	public static HowTo howTo = new HowTo();
