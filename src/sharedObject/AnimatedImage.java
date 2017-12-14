@@ -7,16 +7,20 @@ public class AnimatedImage
     //  each image displays for equal time
     public Image[] frames;
     public double duration;
-    public int index;
+    public int index=0;
+    private double timeCounter=0;
     
     public Image getFrame(double time)
     {
-        index = (int)((time % (frames.length * duration)) / duration);
-        return frames[index];
+        if(System.nanoTime()-timeCounter>duration*1000000000) {
+        		index++;
+        		timeCounter = System.nanoTime();
+        }
+        return frames[index%frames.length];
     }
     
     public int getIndex() {
-    		return index;
+    		return index%frames.length;
     }
     
     public void setDuration(double duration) {

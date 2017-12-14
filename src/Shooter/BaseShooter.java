@@ -45,6 +45,7 @@ public abstract class BaseShooter extends CollidableEntity{
 		this.col = 2;
 		this.x = Ground.getPosX(col, side)-imageW/2;//size of image
 		this.y = Ground.getPosY(lane)-imageH;//size of image
+		this.z = 10;
 		if(side == 0) {
 			up = KeyCode.W;
 			down = KeyCode.S;
@@ -174,7 +175,6 @@ public abstract class BaseShooter extends CollidableEntity{
 		
 		if(side == 0) {
 			for (int i = 0; i < nNormalPic; i++) {
-				System.out.println(ClassLoader.getSystemResource(charName + "_L_" + i + ".png").toString());
 				normalArray[i] = new Image(ClassLoader.getSystemResource(charName + "_L_" + i + ".png").toString() );
 				
 			}
@@ -235,7 +235,7 @@ public abstract class BaseShooter extends CollidableEntity{
 
 	@Override
 	public void draw(GraphicsContext gc) {
-		double t = System.nanoTime() / 1100000000.0;
+		double t = System.nanoTime();// / 1100000000.0;
 		if(movable) {
 			if(warp == false) 
 				gc.drawImage(normal_Animation.getFrame(t), x,  y );

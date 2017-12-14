@@ -1,12 +1,15 @@
 package Shooter;
 
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
+import javafx.scene.image.Image;
 import logic.CollidableEntity;
 import logic.GameLogic;
 import logic.Ground;
+import sharedObject.AnimatedImage;
 
 public class Bomb extends CollidableEntity{
+	private AnimatedImage bomb_Animation = new AnimatedImage();
+	private Image bomb = new Image(ClassLoader.getSystemResource("bomb.png").toString());
 
 	public boolean isThrow = false;
 	private int Bomb_direction ;
@@ -19,7 +22,7 @@ public class Bomb extends CollidableEntity{
 	private double speedY;
 	
 	public Bomb(int side,int lane, int col,BaseShooter owner){
-		this.z = -15;
+		this.z = 20;
 		this.speed = 10;
 		this.speedX = Math.cos(Math.PI/3)*speed;
 		this.speedY = Math.sin(Math.PI/3)*speed;
@@ -36,6 +39,7 @@ public class Bomb extends CollidableEntity{
 		else {
 			this.Bomb_direction = -1;
 		}
+		loadAnimate();
 		bomb();
 	}
 	
@@ -45,29 +49,42 @@ public class Bomb extends CollidableEntity{
 		isThrow = true;
 	}
 
+	protected void loadAnimate() {
+		Image[] bombArray = new Image[25];
+		
+		for (int i = 1; i <= 24; i++) {
+			bombArray[i] = new Image(ClassLoader.getSystemResource("Bomb_" + i + ".png").toString() );
+		}
+		
+		bomb_Animation.frames = bombArray;
+		this.bomb_Animation.setDuration(0.01);
+	}
+	
 	public void update() {
-		if(this.y > Ground.getPosY(lane)) {
+		if(this.y > Ground.getPosY(lane)&&isThrow) {
 			
 			if(target.getCol()==this.col && target.getLane() == this.lane) {
 				owner.doDamage(target,this);
 			}
 			isThrow = false;
-			destroyed = true;
 		}
-		if(speedY<0)this.z=20;
 	}
 	
 	@Override
 	public void draw(GraphicsContext gc) {
 		double t = (System.nanoTime()-posYTimer)/1000000000;
+		double t2 = System.nanoTime();// / 1100000000.0;
 		if(isThrow) {
-			gc.setFill(Color.ORANGE);
-			gc.fillOval(x, y, 25, 25);
+			gc.drawImage(bomb, x, y);
+			
 			y-=speedY;
 			x+=speedX*Bomb_direction;
 			speedY -= (0.5)*t;
-			if(y-speedY > Ground.getPosY(lane)) {
-				gc.fillRect(Ground.getPosX(col, target.getSide())-50,Ground.getPosY(lane)-70, 100, 100);
+		}
+		if(y-speedY > Ground.getPosY(lane)) {
+			gc.drawImage(bomb_Animation.getFrame(t2), Ground.getPosX(col, target.getSide())-30,  Ground.getPosY(lane)-175 );
+			if(bomb_Animation.getIndex()>=24) {
+				destroyed = true;
 			}
 		}
 	}
