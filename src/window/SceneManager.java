@@ -33,6 +33,7 @@ public class SceneManager {
 
 	public static void gotoSceneOf(String goTo) {
 		mainMenu.stopMovingBG();
+		
 		if(goTo.equals("MainMenu")) {
 			mainMenu.startMovingBG();
 			primaryStage.setScene(mainMenuScene);
@@ -54,6 +55,7 @@ public class SceneManager {
 			start.startGame();
 			primaryStage.setScene(startScene);
 			primaryStage.show();
+			mainMenu.stopTheme();
 		}
 		else if(goTo.equals("HowTo")) {
 			primaryStage.setScene(howToScene);
