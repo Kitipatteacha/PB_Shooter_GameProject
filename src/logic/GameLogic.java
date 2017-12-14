@@ -56,8 +56,6 @@ public class GameLogic {
 		addNewObject(p1);
 		addNewObject(p2);
 		addNewObject(timer);
-
-		GameSound.fightTheme.setVolume(0.1);
 		GameSound.fightTheme.play();
 	}
 	
