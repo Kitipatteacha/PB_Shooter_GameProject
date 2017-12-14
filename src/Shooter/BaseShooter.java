@@ -79,10 +79,10 @@ public abstract class BaseShooter extends CollidableEntity{
 	}
 	
 	public void calculateHitbox() {
-		this.hitboxX = this.x + 10;
-		this.hitboxY = this.y + 50;
-		this.hitboxW = this.imageW*0.75;
-		this.hitboxH = this.imageH*0.75;
+		this.hitboxX = Ground.getPosX(col, side)-50;
+		this.hitboxY = Ground.getPosY(lane)-175;
+		this.hitboxW = 100;
+		this.hitboxH = 150;
 	}
 
 	protected void up() {
