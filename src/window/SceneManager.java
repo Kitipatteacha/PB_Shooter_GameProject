@@ -5,6 +5,7 @@ import javafx.stage.Stage;
 import scene.Credit;
 import scene.HowTo;
 import scene.MainMenu;
+import scene.CharacterSelect;
 import scene.Start;
 
 public class SceneManager {
@@ -14,10 +15,12 @@ public class SceneManager {
 	public static MainMenu mainMenu = new MainMenu();
 	public static Credit credit = new Credit();
 	public static HowTo howTo = new HowTo();
+	public static CharacterSelect select = new CharacterSelect();
 	public static Start start;
 	
 	public static Scene creditScene = new Scene(credit,SCENE_WIDTH,SCENE_HEIGHT);
 	public static Scene mainMenuScene = new Scene(mainMenu,SCENE_WIDTH,SCENE_HEIGHT);
+	public static Scene CharacterScene = new Scene(select,SCENE_WIDTH,SCENE_HEIGHT);
 	public static Scene startScene;
 	public static Scene howToScene = new Scene(howTo,SCENE_WIDTH,SCENE_HEIGHT);
 	
@@ -38,7 +41,11 @@ public class SceneManager {
 			primaryStage.setScene(creditScene);
 			primaryStage.show();
 		}
-		else if(goTo.equals("Start")) {
+		else if(goTo.equals("Start")){
+			primaryStage.setScene(CharacterScene);
+			primaryStage.show();
+		}
+		else if(goTo.equals("Play")) {
 			start = new Start();
 			startScene = new Scene(start,SCENE_WIDTH,SCENE_HEIGHT);
 			start.startGame();
