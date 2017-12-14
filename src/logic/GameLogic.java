@@ -38,7 +38,6 @@ public class GameLogic {
 		int p1Choice = CharacterSelect.p1Choice;
 		int p2Choice = CharacterSelect.p2Choice;
 		
-		System.out.println(p1Choice+"  "+p2Choice);
 		
 		if(p1Choice == 0)p1 = new Balloon(0);
 		else if (p1Choice == 1)p1 = new Egg(0);
@@ -50,14 +49,12 @@ public class GameLogic {
 		else if (p2Choice == 2)p2 = new Ninja(1);
 		else if (p2Choice == 3)p2 = new Robot(1);
 		
-		System.out.println(p1.getHp()+"  "+p2.getHp());
 		
 		addNewObject(ground);
 		addNewObject(p1);
 		addNewObject(p2);
 		addNewObject(timer);
 
-		GameSound.fightTheme.setVolume(0.1);
 		GameSound.fightTheme.play();
 	}
 	

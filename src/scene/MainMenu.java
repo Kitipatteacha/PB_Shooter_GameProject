@@ -22,7 +22,6 @@ public class MainMenu extends VBox {
 		int posX=0;
 		@Override
 		public void handle(long now) {
-			// TODO Auto-generated method stub
 			posX+=1;
 			if(posX>=1520)posX=0;
 			WritableImage wim = new WritableImage(im.getPixelReader(),posX,0,800,600);
