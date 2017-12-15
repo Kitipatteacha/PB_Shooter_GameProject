@@ -1,5 +1,7 @@
 package Shooter;
 
+import java.io.FileNotFoundException;
+
 import logic.CollidableEntity;
 import logic.GameLogic;
 
@@ -13,7 +15,11 @@ public class Balloon extends BaseShooter{
 		
 		this.atk = 15;
 		this.atkCD = 0.5;
-		loadAnimate("Balloon");
+		try {
+			loadAnimate("Balloon");
+		} catch (FileNotFoundException e) {
+			System.out.println("Error");
+		}
 	}
 
 	protected void doDamage(BaseShooter other,CollidableEntity way) {

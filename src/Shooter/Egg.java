@@ -1,5 +1,7 @@
 package Shooter;
 
+import java.io.FileNotFoundException;
+
 import logic.CollidableEntity;
 import logic.GameLogic;
 import logic.Ground;
@@ -18,7 +20,11 @@ public class Egg extends BaseShooter{
 		this.atkCD = 2.0;
 		if(side==0)this.x = Ground.getPosX(col, side)-120;
 		else this.x = Ground.getPosX(col, side)-50;
-		loadAnimate("Egg");
+		try {
+			loadAnimate("Egg");
+		} catch (FileNotFoundException e) {
+			System.out.println("Error");
+		}
 	}
 
 	protected void left() {

@@ -1,5 +1,7 @@
 package Shooter;
 
+import java.io.FileNotFoundException;
+
 import logic.CollidableEntity;
 import logic.GameLogic;
 import logic.Ground;
@@ -22,7 +24,11 @@ public class Ninja extends BaseShooter{
 		this.bombDmg = 15;
 		this.atk = 8;
 		this.atkCD = 0.8;
-		loadAnimate("Ninja");
+		try {
+			loadAnimate("Ninja");
+		} catch (FileNotFoundException e) {
+			System.out.println("Error");
+		}
 	}
 	
 	protected void up() {

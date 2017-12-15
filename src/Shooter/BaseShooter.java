@@ -1,5 +1,7 @@
 package Shooter;
 
+import java.io.FileNotFoundException;
+
 import input.InputUtility;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -170,7 +172,7 @@ public abstract class BaseShooter extends CollidableEntity{
 		this.unshootableTimer = System.nanoTime()+(durationSecond*1000000000);
 	}
 	
-	protected void loadAnimate(String charName) {
+	protected void loadAnimate(String charName) throws FileNotFoundException{
 		Image[] normalArray = new Image[nNormalPic];
 		Image[] warpArray = new Image[nWarpPic];
 		

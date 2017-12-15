@@ -1,5 +1,7 @@
 package Shooter;
 
+import java.io.FileNotFoundException;
+
 import input.InputUtility;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
@@ -26,7 +28,11 @@ public class Robot extends BaseShooter{
 		this.atk = 3;
 		this.atkCD = 1.2;
 		this.bombCD = 4;
-		loadAnimate("Robot");
+		try {
+			loadAnimate("Robot");
+		} catch (FileNotFoundException e) {
+			System.out.println("Error");
+		}
 	}
 	protected void up() {
 		if(lane-1>0&&movable) {
