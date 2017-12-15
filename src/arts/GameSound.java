@@ -31,6 +31,7 @@ public class GameSound {
 			@Override
 			public void run() {
 				winSound.play(1);
+				fightTheme.stop();
 			}
 			
 		}).start();

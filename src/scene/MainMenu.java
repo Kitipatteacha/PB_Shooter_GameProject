@@ -46,7 +46,6 @@ public class MainMenu extends VBox {
 		buttonBox.getChildren().addAll(canvas,B1,B2,B3);
 		this.getChildren().add(buttonBox);
 		buttonBox.setAlignment(Pos.CENTER);
-		soundTheme();
 		movingBG.start();
 	}
 

@@ -36,6 +36,7 @@ public class SceneManager {
 		
 		if(goTo.equals("MainMenu")) {
 			mainMenu.startMovingBG();
+			mainMenu.soundTheme();
 			primaryStage.setScene(mainMenuScene);
 			primaryStage.show();
 		}
